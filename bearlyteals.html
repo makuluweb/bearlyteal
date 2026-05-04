@@ -3,2042 +3,1490 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>bearlyteals — Fibre Arts Companion</title>
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<title>Bombers Shed</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  /* Light cream base */
-  --parchment:        #FAF6EE;
-  --parchment-dark:   #F0E8D8;
-  --parchment-deeper: #DDD0B8;
-  /* Text — warm dark brown, readable on cream */
-  --ink:        #2E1F0E;
-  --ink-light:  #4A3218;
-  --ink-faded:  #8C7050;
-  /* Accent — deep forest green (Victorian, warm) */
-  --accent:       #2E5C3A;
-  --accent-mid:   #3A7248;
-  --accent-light: #5A9468;
-  --accent-pale:  #D4E8D8;
-  --accent-faint: #EDF5EF;
-  /* Warm muted gold — aged, not bright */
-  --gold:        #8A7040;
-  --gold-bright: #A08848;
-  --gold-light:  #C8A868;
-  --gold-pale:   #EDE0C0;
-  --gold-deep:   #5A4818;
-  /* Borders */
-  --border:       #C0A870;
-  --border-gold:  #B09858;
-  --border-light: #D4BC90;
-  /* Shadows */
-  --shadow:    4px 4px 20px rgba(46,31,14,0.13);
-  --shadow-sm: 2px 2px 10px rgba(46,31,14,0.09);
-  /* Weathered gilt frame */
-  --frame-gold:       #8A7440;
-  --frame-gold-dark:  #5A4A20;
-  --frame-gold-light: #A89050;
-  --frame-gold-shine: #C0A860;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: 'Lato', sans-serif;
-  background: var(--parchment);
-  background-image:
-    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(138,112,64,0.06) 39px, rgba(138,112,64,0.06) 40px),
-    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(138,112,64,0.06) 39px, rgba(138,112,64,0.06) 40px);
-  color: var(--ink);
-  min-height: 100vh;
-  font-size: 14px;
-  font-weight: 300;
-}
-
-/* ── Header ── */
-header {
-  background: var(--ink);
-  border-bottom: 2px solid var(--border-gold);
-  padding: 0 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 72px;
-  position: sticky;
-  top: 0;
-  z-index: 200;
-}
-
-header::after {
-  content: '';
-  position: absolute;
-  bottom: -3px; left: 0; right: 0;
-  height: 1px;
-  background: rgba(200,160,48,0.3);
-}
-
-.logo-wrap { display: flex; flex-direction: column; }
-
-.logo {
-  font-family: 'IM Fell English', serif;
-  font-size: 24px;
-  color: var(--parchment);
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  line-height: 1;
-}
-
-.logo-accent {
-  color: var(--accent-light);
-}
-
-.logo-sub {
-  font-family: 'Playfair Display', serif;
-  font-size: 9px;
-  color: var(--gold-light);
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  margin-top: 3px;
-  font-style: italic;
-}
-
-/* ── Header ornament ── */
-.header-orn {
-  font-family: 'IM Fell English', serif;
-  color: rgba(200,160,48,0.25);
-  font-size: 28px;
-  letter-spacing: 12px;
-  pointer-events: none;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-nav { display: flex; gap: 5px; }
-
-.tab-btn {
-  padding: 7px 18px;
-  border: 1px solid rgba(168,144,96,0.4);
-  background: transparent;
-  cursor: pointer;
-  font-family: 'Playfair Display', serif;
-  font-size: 11px;
-  font-style: italic;
-  color: var(--gold-light);
-  transition: all 0.2s;
-  letter-spacing: 0.5px;
-  position: relative;
-}
-
-.tab-btn:hover {
-  background: rgba(90,148,104,0.2);
-  color: var(--accent-light);
-  border-color: var(--accent-light);
-}
-
-.tab-btn.active {
-  background: var(--accent);
-  color: var(--parchment);
-  border-color: var(--accent-light);
-  font-style: normal;
-  font-weight: 400;
-}
-
-/* ── Main ── */
-main {
-  max-width: 1140px;
-  margin: 0 auto;
-  padding: 2.5rem 2rem;
-}
-
-.tab-panel { display: none; }
-.tab-panel.active { display: block; }
-
-/* ── Section header ── */
-.section-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border-gold);
-  position: relative;
-}
-
-.section-header::after {
-  content: '';
-  position: absolute;
-  bottom: -3px; left: 0; right: 0;
-  height: 1px;
-  background: rgba(200,160,48,0.2);
-}
-
-.section-title {
-  font-family: 'IM Fell English', serif;
-  font-size: 28px;
-  color: var(--ink);
-  letter-spacing: 1px;
-}
-
-.section-title em { font-style: italic; color: var(--accent); }
-
-.section-subtitle {
-  font-family: 'Playfair Display', serif;
-  font-size: 10px;
-  font-style: italic;
-  color: var(--ink-faded);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-left: 10px;
-  margin-bottom: 4px;
-}
-/* ── Primary button ── */
-.btn-primary {
-  background: var(--accent);
-  color: var(--parchment);
-  border: 1px solid var(--accent-light);
-  padding: 9px 22px;
-  cursor: pointer;
-  font-family: 'Playfair Display', serif;
-  font-size: 12px;
-  font-style: italic;
-  transition: all 0.2s;
-  letter-spacing: 0.5px;
-  clip-path: polygon(8px 0%, calc(100% - 8px) 0%, 100% 50%, calc(100% - 8px) 100%, 8px 100%, 0% 50%);
-}
-
-.btn-primary:hover {
-  background: var(--accent-mid);
-  color: var(--parchment);
-  transform: translateY(-1px);
-}
-
-/* ════════════════════════════════════════
-   ORNATE GOLD FRAME (the gallery wall effect)
-   ════════════════════════════════════════ */
-
-/* Gallery grid */
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 3rem 2.5rem;
-  padding: 1rem 0.5rem 2rem;
-}
-
-/* The frame wrapper */
-.frame-outer {
-  position: relative;
-  padding: 14px;
-  background:
-    linear-gradient(135deg, var(--frame-gold-light) 0%, var(--frame-gold) 25%, var(--frame-gold-dark) 50%, var(--frame-gold) 75%, var(--frame-gold-light) 100%);
-  box-shadow:
-    0 0 0 1px var(--frame-gold-dark),
-    2px 2px 0 2px rgba(255,232,122,0.25),
-    inset 0 0 0 1px rgba(255,232,122,0.4),
-    6px 12px 32px rgba(46,31,14,0.35),
-    -2px -2px 8px rgba(255,232,122,0.1);
-}
-
-/* Outer bead border */
-.frame-outer::before {
-  content: '';
-  position: absolute;
-  inset: 3px;
-  border: 1px solid rgba(255,232,122,0.5);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Inner shadow lip */
-.frame-outer::after {
-  content: '';
-  position: absolute;
-  inset: 8px;
-  box-shadow: inset 2px 2px 6px rgba(46,31,14,0.35), inset -1px -1px 3px rgba(255,232,122,0.15);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Corner ornaments rendered via SVG data URIs */
-.frame-corner {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  z-index: 2;
-  pointer-events: none;
-}
-.frame-corner.tl { top: 2px; left: 2px; }
-.frame-corner.tr { top: 2px; right: 2px; transform: scaleX(-1); }
-.frame-corner.bl { bottom: 2px; left: 2px; transform: scaleY(-1); }
-.frame-corner.br { bottom: 2px; right: 2px; transform: scale(-1,-1); }
-
-/* The actual card sits inside the frame */
-.project-card {
-  background: #F8F2E4;
-  border: none;
-  position: relative;
-  z-index: 0;
-}
-
-.project-card:hover { background: #FAF6EC; }
-
-/* Hover: frame glows */
-.frame-outer:hover {
-  box-shadow:
-    0 0 0 1px var(--frame-gold-dark),
-    2px 2px 0 2px rgba(255,232,122,0.35),
-    inset 0 0 0 1px rgba(255,232,122,0.6),
-    8px 18px 40px rgba(46,31,14,0.40),
-    0 0 20px rgba(200,160,48,0.25);
-  transform: translateY(-3px);
-  transition: all 0.3s;
-}
-
-/* ── Card internals ── */
-.card-photo {
-  width: 100%;
-  height: 160px;
-  position: relative;
-  overflow: hidden;
-}
-
-.card-photo img { width: 100%; height: 100%; object-fit: cover; filter: sepia(10%) contrast(1.05); }
-
-.card-photo-placeholder {
-  width: 100%;
-  height: 160px;
-  background: linear-gradient(135deg, var(--parchment-dark) 0%, var(--parchment) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'IM Fell English', serif;
-  font-size: 13px;
-  letter-spacing: 3px;
-  color: var(--ink-faded);
-  text-transform: uppercase;
-}
-.card-status {
-  position: absolute;
-  top: 8px; right: 8px;
-  padding: 3px 10px;
-  font-family: 'Playfair Display', serif;
-  font-size: 9px;
-  font-style: italic;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  border: 1px solid currentColor;
-}
-
-.status-active   { background: var(--accent);    color: var(--accent-pale); border-color: var(--accent-light); }
-.status-complete { background: var(--gold-deep);  color: var(--gold-light);  border-color: var(--gold); }
-.status-paused   { background: var(--ink-faded);  color: var(--parchment);   border-color: var(--parchment-deeper); }
-
-.card-body { padding: 1rem 1.1rem 1rem; }
-
-.card-title {
-  font-family: 'IM Fell English', serif;
-  font-size: 16px;
-  color: var(--ink);
-  margin-bottom: 5px;
-  letter-spacing: 0.3px;
-}
-
-.card-meta {
-  font-size: 11px;
-  color: var(--ink-faded);
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-}
-
-/* ── Progress ── */
-.progress-wrap { margin: 10px 0 6px; }
-
-.progress-label {
-  display: flex;
-  justify-content: space-between;
-  font-size: 10px;
-  color: var(--ink-faded);
-  margin-bottom: 5px;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-.progress-bar {
-  height: 6px;
-  background: var(--parchment-dark);
-  border: 1px solid var(--border-light);
-}
-.progress-fill {
-  height: 100%;
-  background: repeating-linear-gradient(
-    45deg, var(--accent) 0px, var(--accent) 3px, var(--accent-light) 3px, var(--accent-light) 6px
-  );
-  transition: width 0.4s ease;
-}
-
-/* ── Row tracker ── */
-.row-tracker { margin-top: 10px; }
-
-.row-tracker-label {
-  font-size: 10px;
-  color: var(--ink-faded);
-  margin-bottom: 5px;
-  display: flex;
-  justify-content: space-between;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.row-counter { display: flex; align-items: center; gap: 10px; }
-
-.row-btn {
-  width: 28px; height: 28px;
-  border: 1px solid var(--border-gold);
-  background: var(--gold-pale);
-  cursor: pointer;
-  font-size: 16px;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.15s;
-  color: var(--accent);
-  font-family: 'IM Fell English', serif;
-}
-
-.row-btn:hover { background: var(--accent); color: var(--parchment); border-color: var(--accent); }
-
-.row-count {
-  font-family: 'IM Fell English', serif;
-  font-size: 20px;
-  min-width: 30px;
-  text-align: center;
-  color: var(--accent);
-}
-
-.card-dates {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-  font-size: 10px;
-  color: var(--ink-faded);
-  border-top: 1px dashed var(--border-light);
-  padding-top: 8px;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  flex-wrap: wrap;
-}
-
-.card-actions {
-  display: flex;
-  gap: 5px;
-  margin-top: 10px;
-  flex-wrap: wrap;
-}
-
-.btn-small {
-  padding: 4px 11px;
-  border: 1px solid var(--border-gold);
-  background: var(--gold-pale);
-  cursor: pointer;
-  font-size: 10px;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  color: var(--ink-faded);
-  transition: all 0.15s;
-  letter-spacing: 0.3px;
-}
-
-.btn-small:hover { background: var(--accent-pale); border-color: var(--accent); color: var(--accent); }
-.btn-small.danger:hover { background: var(--accent-pale); border-color: var(--accent); color: var(--accent); }
-
-/* ── Fibre tags ── */
-.fibre-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  padding: 1px 8px;
-  background: var(--accent-pale);
-  color: var(--accent);
-  border: 1px solid rgba(46,148,104,0.25);
-  font-size: 10px;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  margin: 2px;
-}
-
-/* ── Note entries ── */
-.notes-log { display: flex; flex-direction: column; gap: 5px; margin-top: 8px; }
-
-.note-entry {
-  background: var(--gold-pale);
-  border-left: 3px solid var(--accent-light);
-  padding: 6px 10px;
-  font-size: 12px;
-  color: var(--ink-light);
-  line-height: 1.5;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-}
-
-.note-date { font-size: 10px; color: var(--ink-faded); margin-top: 3px; font-style: normal; }
-
-.quick-note { display: flex; gap: 6px; margin-top: 8px; }
-
-.quick-note input {
-  flex: 1;
-  padding: 6px 10px;
-  border: 1px solid var(--border-light);
-  background: var(--parchment-dark);
-  font-family: 'Playfair Display', serif;
-  font-size: 12px;
-  font-style: italic;
-  color: var(--ink);
-  outline: none;
-}
-
-.quick-note input:focus { border-color: var(--accent); background: var(--parchment); }
-
-.quick-note button {
-  padding: 6px 12px;
-  background: var(--accent);
-  color: var(--parchment);
-  border: 1px solid var(--accent-light);
-  cursor: pointer;
-  font-size: 11px;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  transition: background 0.15s;
-}
-
-.quick-note button:hover { background: var(--accent-mid); }
-
-/* ── Empty state ── */
-.empty-state {
-  text-align: center;
-  padding: 4rem 2rem;
-  color: var(--ink-faded);
-  grid-column: 1/-1;
-  background: rgba(140,116,72,0.05);
-  border: 1px solid rgba(168,144,96,0.2);
-}
-
-.empty-icon {
-  font-family: 'IM Fell English', serif;
-  font-size: 48px;
-  color: var(--accent-light);
-  margin-bottom: 1rem;
-  display: block;
-}
-
-.empty-state h3 { font-family: 'IM Fell English', serif; font-size: 22px; color: var(--accent); margin-bottom: 0.5rem; }
-.empty-state p { font-size: 13px; margin-bottom: 1.5rem; font-family: 'Playfair Display', serif; font-style: italic; color: var(--ink-faded); }
-
-/* ── Stats strip ── */
-.stats-strip {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 10px;
-  margin-bottom: 2rem;
-}
-
-.stat-box {
-  background: var(--ink);
-  border: 1px solid var(--border-gold);
-  padding: 0.9rem 1rem;
-  text-align: center;
-  position: relative;
-}
-
-.stat-box::before, .stat-box::after {
-  content: '';
-  position: absolute;
-  width: 8px; height: 8px;
-  border-color: var(--border-gold);
-  border-style: solid;
-  opacity: 0.7;
-}
-.stat-box::before { top: 3px; left: 3px; border-width: 1px 0 0 1px; }
-.stat-box::after  { bottom: 3px; right: 3px; border-width: 0 1px 1px 0; }
-
-.stat-num { font-family: 'IM Fell English', serif; font-size: 26px; color: var(--accent-light); line-height: 1; }
-.stat-label { font-size: 10px; color: var(--parchment-deeper); margin-top: 4px; font-family: 'Playfair Display', serif; font-style: italic; text-transform: uppercase; letter-spacing: 0.5px; }
-
-/* ══════════════════════════════════
-   MODALS
-   ══════════════════════════════════ */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(46,31,14,0.65);
-  z-index: 1000;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 2rem 1rem;
-  overflow-y: auto;
-}
-
-.modal-overlay.open { display: flex; }
-
-.modal {
-  background: var(--parchment);
-  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%238C7240' fill-opacity='0.04'%3E%3Ccircle cx='20' cy='20' r='10'/%3E%3C/g%3E%3C/svg%3E");
-  border: 1px solid var(--border-gold);
-  border-top: 3px solid var(--accent-mid);
-  width: 100%;
-  max-width: 600px;
-  box-shadow: 8px 8px 40px rgba(42,31,14,0.4);
-  animation: modalIn 0.25s ease;
-  margin: auto;
-}
-
-@keyframes modalIn {
-  from { transform: translateY(-16px) scale(0.98); opacity: 0; }
-  to   { transform: translateY(0) scale(1); opacity: 1; }
-}
-
-.modal-header {
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid var(--border-gold);
-  display: flex; align-items: center; justify-content: space-between;
-  background: var(--parchment-dark);
-}
-
-.modal-title { font-family: 'IM Fell English', serif; font-size: 19px; color: var(--ink); }
-
-.modal-close {
-  width: 28px; height: 28px;
-  border: 1px solid var(--border-light);
-  background: none; cursor: pointer;
-  font-size: 13px; display: flex; align-items: center; justify-content: center;
-  color: var(--ink-faded); transition: all 0.15s;
-}
-
-.modal-close:hover { background: var(--accent); color: var(--gold-light); border-color: var(--accent); }
-
-.modal-body { padding: 1.5rem; }
-/* ── Forms ── */
-.form-row         { display: grid; grid-template-columns: 1fr 1fr;     gap: 12px; margin-bottom: 12px; }
-.form-row.single  { display: grid; grid-template-columns: 1fr;         gap: 12px; margin-bottom: 12px; }
-.form-row.triple  { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-
-.form-group { display: flex; flex-direction: column; gap: 4px; }
-
-.form-group label {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--ink-faded);
-  font-family: 'Playfair Display', serif;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  padding: 7px 10px;
-  border: 1px solid var(--border-light);
-  background: #EDE4CC;
-  color: var(--ink);
-  font-family: 'Playfair Display', serif;
-  font-size: 13px;
-  font-style: italic;
-  outline: none;
-  transition: border-color 0.15s;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus { border-color: var(--accent-mid); background: var(--parchment); }
-
-.form-group textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
-
-.form-section-title {
-  font-family: 'IM Fell English', serif;
-  font-size: 13px;
-  color: var(--accent-mid);
-  border-bottom: 1px solid var(--accent-pale);
-  padding-bottom: 4px;
-  margin: 16px 0 10px;
-  letter-spacing: 0.5px;
-  display: flex; align-items: center; gap: 8px;
-}
-
-.form-section-title::before { content: '❧'; font-size: 14px; color: var(--gold); }
-
-.modal-footer {
-  padding: 1rem 1.5rem;
-  border-top: 1px solid var(--border-gold);
-  background: var(--parchment-dark);
-  display: flex; justify-content: flex-end; gap: 8px;
-}
-
-.btn-cancel {
-  padding: 8px 20px;
-  border: 1px solid var(--border-light);
-  background: none; cursor: pointer;
-  font-family: 'Playfair Display', serif;
-  font-size: 12px; font-style: italic;
-  color: var(--ink-faded); transition: all 0.15s;
-}
-
-.btn-cancel:hover { background: var(--parchment-dark); }
-
-/* ── Photo upload ── */
-.photo-upload {
-  border: 1px dashed var(--border-light);
-  padding: 1rem;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  background: #EDE4CC;
-  position: relative;
-}
-
-.photo-upload:hover { border-color: var(--accent); background: var(--accent-faint); }
-.photo-upload input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
-.photo-upload-icon { font-family: 'IM Fell English', serif; font-size: 20px; color: var(--accent-mid); margin-bottom: 4px; }
-.photo-upload p { font-size: 11px; color: var(--ink-faded); font-family: 'Playfair Display', serif; font-style: italic; }
-
-.photo-preview { width: 100%; height: 100px; object-fit: cover; margin-top: 8px; display: none; border: 1px solid var(--border-light); filter: sepia(8%); }
-
-.pdf-indicator {
-  display: inline-flex; align-items: center; gap: 5px;
-  padding: 2px 8px;
-  background: var(--gold-light); border: 1px solid var(--gold);
-  font-size: 10px; color: var(--gold-deep);
-  font-family: 'Playfair Display', serif; font-style: italic;
-}
-
-/* ── Stash grid ── */
-.stash-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 3rem 2.5rem;
-  padding: 1rem 0.5rem 2rem;
-}
-
-.yarn-card {
-  background: #F8F2E4;
-  border: none;
-  position: relative;
-}
-
-.yarn-swatch { width: 100%; height: 65px; border: none; margin-bottom: 10px; }
-.yarn-name { font-family: 'IM Fell English', serif; font-size: 15px; margin-bottom: 4px; color: var(--ink); }
-.yarn-detail { font-size: 11px; color: var(--ink-faded); line-height: 1.8; font-family: 'Playfair Display', serif; font-style: italic; }
-
-.yarn-weight-badge {
-  display: inline-block;
-  padding: 2px 8px;
-  border: 1px solid var(--accent);
-  font-size: 10px;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  color: var(--accent);
-  margin-top: 6px;
-}
-
-/* ── Usage tracker ── */
-.usage-tracker { margin-top: 10px; }
-
-.usage-label {
-  font-size: 10px; color: var(--ink-faded);
-  font-family: 'Playfair Display', serif; font-style: italic;
-  text-transform: uppercase; letter-spacing: 0.5px;
-  display: flex; justify-content: space-between; margin-bottom: 5px;
-}
-
-.usage-bar { height: 6px; background: var(--parchment-dark); border: 1px solid var(--border-light); margin-bottom: 5px; }
-
-.usage-fill {
-  height: 100%;
-  background: repeating-linear-gradient(45deg, var(--accent) 0px, var(--accent) 3px, var(--accent-light) 3px, var(--accent-light) 6px);
-  transition: width 0.4s;
-}
-
-.usage-controls { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-
-.usage-input-wrap { display: flex; align-items: center; gap: 4px; flex: 1; min-width: 90px; }
-
-.usage-input-wrap input {
-  width: 65px; padding: 4px 7px;
-  border: 1px solid var(--border-light);
-  background: #EDE4CC;
-  font-family: 'Playfair Display', serif; font-size: 12px; font-style: italic;
-  color: var(--ink); outline: none;
-}
-
-.usage-input-wrap input:focus { border-color: var(--accent); background: var(--parchment); }
-.usage-unit { font-size: 10px; color: var(--ink-faded); font-family: 'Playfair Display', serif; font-style: italic; }
-
-.btn-use {
-  padding: 4px 10px;
-  background: var(--accent); color: var(--parchment);
-  border: 1px solid var(--accent-light); cursor: pointer;
-  font-size: 10px; font-family: 'Playfair Display', serif; font-style: italic;
-  transition: all 0.15s; white-space: nowrap;
-}
-
-.btn-use:hover { background: var(--accent-mid); }
-
-/* ── Future badge ── */
-.future-badge {
-  display: inline-flex; align-items: center; gap: 4px;
-  padding: 2px 8px;
-  background: var(--gold-light); border: 1px solid var(--gold);
-  color: var(--gold-deep); font-size: 10px;
-  font-family: 'Playfair Display', serif; font-style: italic; margin-bottom: 8px;
-}
-
-.linked-yarn {
-  display: flex; align-items: center; gap: 8px;
-  padding: 5px 9px;
-  background: var(--accent-pale); border: 1px solid rgba(46,148,104,0.2);
-  font-size: 11px; font-family: 'Playfair Display', serif; font-style: italic;
-  margin: 3px 0; cursor: pointer; transition: all 0.15s; color: var(--accent);
-}
-
-.linked-yarn:hover { background: var(--accent); color: var(--parchment); }
-.linked-yarn .swatch { width: 14px; height: 14px; border: 1px solid rgba(0,0,0,0.15); flex-shrink: 0; }
-
-/* ══════════════════════════════
-   BACKUP TAB
-   ══════════════════════════════ */
-.backup-section {
-  background: rgba(140,116,72,0.06);
-  border: 1px solid var(--border-gold);
-  padding: 2rem;
-  margin-bottom: 1.5rem;
-}
-
-.backup-section h2 {
-  font-family: 'IM Fell English', serif;
-  font-size: 18px;
-  color: var(--accent);
-  margin-bottom: 6px;
-  letter-spacing: 0.5px;
-}
-
-.backup-section p {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 12px;
-  color: var(--ink-faded);
-  margin-bottom: 1.2rem;
-  line-height: 1.7;
-}
-
-.backup-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-
-.btn-backup {
-  padding: 10px 24px;
-  border: 1px solid var(--border-gold);
-  background: var(--ink);
-  cursor: pointer;
-  font-family: 'Playfair Display', serif;
-  font-size: 12px; font-style: italic;
-  color: var(--gold-light);
-  transition: all 0.2s;
-  letter-spacing: 0.5px;
-}
-
-.btn-backup:hover { background: var(--accent); border-color: var(--accent-light); color: var(--gold-bright); }
-.btn-backup.danger:hover { background: var(--accent); border-color: var(--accent); color: var(--parchment); }
-
-.backup-status {
-  margin-top: 12px;
-  font-family: 'Playfair Display', serif;
-  font-size: 12px;
-  font-style: italic;
-  color: var(--accent-light);
-  min-height: 20px;
-}
-
-.json-preview {
-  width: 100%;
-  height: 160px;
-  padding: 10px;
-  border: 1px solid var(--border-light);
-  background: var(--ink);
-  color: var(--accent-light);
-  font-family: 'Courier New', monospace;
-  font-size: 11px;
-  resize: vertical;
-  outline: none;
-  margin-top: 10px;
-  line-height: 1.5;
-}
-
-.backup-drop-zone {
-  border: 1px dashed var(--border-gold);
-  padding: 1.5rem;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  background: rgba(140,116,72,0.04);
-  position: relative;
-  margin-top: 10px;
-}
-
-.backup-drop-zone:hover { background: rgba(46,148,104,0.06); border-color: var(--accent-light); }
-.backup-drop-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
-.backup-drop-zone p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 12px; color: var(--ink-faded); }
-
-.data-summary {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 1.5rem;
-}
-
-.hint { font-size: 10px; color: var(--ink-faded); font-style: italic; font-family: 'Playfair Display', serif; margin-top: 2px; }
-
-/* ── SVG corner ornament ── */
-.corner-svg {
-  width: 22px; height: 22px;
-  fill: none;
-  stroke: var(--frame-gold-shine);
-  stroke-width: 1.2;
-  opacity: 0.9;
-}
-
-@media (max-width: 620px) {
-  main { padding: 1rem; }
-  .form-row { grid-template-columns: 1fr; }
-  .form-row.triple { grid-template-columns: 1fr 1fr; }
-  header { padding: 0 1rem; height: auto; flex-direction: column; padding: 10px 1rem; gap: 8px; }
-  nav { flex-wrap: wrap; justify-content: center; }
-  .tab-btn { font-size: 10px; padding: 6px 10px; }
-  .header-orn { display: none; }
-  .data-summary { grid-template-columns: 1fr 1fr; }
-}
+  :root {
+    --bg: #0e0e0e;
+    --surface: #161616;
+    --surface2: #1f1f1f;
+    --surface3: #2a2a2a;
+    --border: #333;
+    --accent: #e8c84a;
+    --accent2: #e05c2a;
+    --text: #e8e4dc;
+    --text-muted: #888;
+    --text-dim: #555;
+    --green: #4caf6e;
+    --red: #e05c2a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.4;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 3px solid var(--accent);
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    text-shadow: 2px 2px 0 #000;
+  }
+  .logo span { color: var(--text-muted); font-size: 1rem; margin-left: 8px; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.15em; }
+  .header-right { display: flex; gap: 12px; align-items: center; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 0;
+    padding: 0 24px;
+  }
+  .tab-btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 14px 24px;
+    background: none; border: none;
+    color: var(--text-muted); cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.15s;
+    margin-bottom: -1px;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ── MAIN ── */
+  .main { max-width: 960px; margin: 0 auto; padding: 32px 24px; }
+
+  /* ── PANELS ── */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── IMPORT PANEL ── */
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem; letter-spacing: 0.08em;
+    color: var(--accent); margin-bottom: 6px;
+  }
+  .section-sub { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; }
+
+  .import-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 640px) { .import-grid { grid-template-columns: 1fr; } }
+
+  .import-box {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 20px;
+  }
+  .import-box h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 14px;
+  }
+
+  textarea {
+    width: 100%; height: 280px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 4px; padding: 14px;
+    color: var(--text); font-family: 'Barlow', sans-serif; font-size: 0.85rem;
+    resize: vertical; outline: none; line-height: 1.6;
+    transition: border-color 0.15s;
+  }
+  textarea:focus { border-color: var(--accent); }
+  textarea::placeholder { color: var(--text-dim); }
+
+  .file-drop {
+    border: 2px dashed var(--border); border-radius: 4px;
+    height: 280px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 12px;
+    cursor: pointer; transition: all 0.15s; color: var(--text-muted);
+    text-align: center; padding: 20px;
+  }
+  .file-drop:hover, .file-drop.drag-over { border-color: var(--accent); color: var(--accent); background: rgba(232,200,74,0.04); }
+  .file-drop .drop-icon { font-size: 2.5rem; }
+  .file-drop p { font-size: 0.9rem; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.05em; }
+  .file-drop small { font-size: 0.75rem; color: var(--text-dim); }
+  #file-input { display: none; }
+
+  .btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 11px 24px; border: none; border-radius: 3px; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-primary { background: var(--accent); color: #000; }
+  .btn-primary:hover { background: #f0d455; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(232,200,74,0.3); }
+  .btn-secondary { background: var(--surface3); color: var(--text); border: 1px solid var(--border); }
+  .btn-secondary:hover { background: var(--surface2); border-color: var(--accent); color: var(--accent); }
+  .btn-danger { background: transparent; color: var(--red); border: 1px solid var(--red); }
+  .btn-danger:hover { background: var(--red); color: #fff; }
+
+  .import-actions { margin-top: 20px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+  .week-label-row { margin-top: 20px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .week-label-row label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+  .week-label-row input[type=number], .week-label-row input[type=text] {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 3px; padding: 9px 14px; color: var(--text);
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.9rem;
+    outline: none; width: 90px; transition: border-color 0.15s;
+  }
+  .week-label-row input:focus { border-color: var(--accent); }
+
+  .alert {
+    padding: 12px 16px; border-radius: 3px; font-size: 0.9rem; margin-top: 12px;
+    font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.05em;
+  }
+  .alert-success { background: rgba(76,175,110,0.12); border: 1px solid var(--green); color: var(--green); }
+  .alert-error { background: rgba(224,92,42,0.12); border: 1px solid var(--red); color: var(--red); }
+
+  /* ── PROGRAM PANEL ── */
+  .block-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; }
+  .block-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 0.05em; color: var(--text); }
+  .block-badge {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px; background: var(--surface3); color: var(--accent); border: 1px solid var(--accent);
+  }
+
+  .week-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; margin-bottom: 28px; }
+  .week-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 10px 8px; text-align: center; cursor: pointer;
+    transition: all 0.15s; position: relative;
+  }
+  .week-card:hover { border-color: var(--accent); background: var(--surface2); }
+  .week-card.active { border-color: var(--accent); background: rgba(232,200,74,0.08); }
+  .week-card .wnum { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--accent); }
+  .week-card .wpct { font-size: 0.7rem; color: var(--text-muted); font-family: 'Barlow Condensed', sans-serif; }
+  .week-card .wbar { height: 3px; border-radius: 2px; background: var(--border); margin-top: 6px; overflow: hidden; }
+  .week-card .wbar-fill { height: 100%; background: var(--green); border-radius: 2px; transition: width 0.3s; }
+
+  .day-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+  .day-tab {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 8px 16px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 3px; color: var(--text-muted); cursor: pointer; transition: all 0.15s;
+    position: relative;
+  }
+  .day-tab:hover { border-color: var(--accent); color: var(--text); }
+  .day-tab.active { background: var(--accent); color: #000; border-color: var(--accent); }
+  .day-tab .day-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); position: absolute; top: 4px; right: 4px; display: none; }
+  .day-tab.done .day-dot { display: block; }
+
+  /* ── WORKOUT DAY ── */
+  .day-header { margin-bottom: 20px; }
+  .day-title { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.06em; }
+  .day-meta { color: var(--text-muted); font-size: 0.85rem; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.05em; margin-top: 4px; }
+
+  .rest-day {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 6px; padding: 48px; text-align: center;
+  }
+  .rest-day .rest-icon { font-size: 3rem; margin-bottom: 12px; }
+  .rest-day h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.1em; color: var(--text-muted); }
+
+  .exercise-block {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 6px; margin-bottom: 12px; overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .exercise-block.completed { border-color: var(--green); opacity: 0.75; }
+  .exercise-block:hover { border-color: var(--surface3); }
+
+  .ex-header {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 16px 18px; cursor: pointer;
+  }
+  .ex-check {
+    width: 22px; height: 22px; min-width: 22px;
+    border: 2px solid var(--border); border-radius: 3px;
+    background: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s; margin-top: 2px;
+  }
+  .ex-check:hover { border-color: var(--green); }
+  .ex-check.checked { background: var(--green); border-color: var(--green); }
+  .ex-check.checked::after { content: '✓'; color: #fff; font-size: 0.8rem; font-weight: 700; }
+
+  .ex-name {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 1.05rem; letter-spacing: 0.05em; flex: 1;
+    line-height: 1.3;
+  }
+  .completed .ex-name { text-decoration: line-through; color: var(--text-muted); }
+
+  .ex-expand { color: var(--text-dim); font-size: 1rem; transition: transform 0.2s; cursor: pointer; padding: 2px 6px; }
+  .ex-expand.open { transform: rotate(180deg); }
+
+  .ex-body { padding: 0 18px 16px 54px; display: none; }
+  .ex-body.open { display: block; }
+  .ex-detail {
+    background: var(--surface2); border: 1px solid var(--surface3);
+    border-radius: 4px; padding: 12px 14px; font-size: 0.88rem;
+    color: var(--text-muted); line-height: 1.7; margin-bottom: 10px;
+    white-space: pre-line;
+  }
+  .ex-detail a { color: var(--accent); text-decoration: none; font-size: 0.8rem; }
+  .ex-detail a:hover { text-decoration: underline; }
+
+  .ex-comment { width: 100%; margin-top: 4px; }
+  .ex-comment textarea {
+    height: 70px; font-size: 0.85rem;
+    background: var(--surface2); border: 1px solid var(--surface3);
+  }
+  .ex-comment textarea:focus { border-color: var(--accent); }
+  .comment-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px; }
+
+  /* ── EXERCISE EDIT CONTROLS ── */
+  .ex-edit-controls {
+    display: flex; gap: 4px; align-items: center; opacity: 0; transition: opacity 0.15s; margin-left: auto;
+  }
+  .exercise-block:hover .ex-edit-controls { opacity: 1; }
+  .ex-ctrl-btn {
+    background: var(--surface3); border: 1px solid var(--border);
+    color: var(--text-muted); border-radius: 3px; width: 26px; height: 26px;
+    font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.12s; padding: 0; line-height: 1;
+  }
+  .ex-ctrl-btn:hover:not(:disabled) { background: var(--surface2); color: var(--text); border-color: var(--accent); }
+  .ex-ctrl-btn:disabled { opacity: 0.2; cursor: default; }
+  .ex-ctrl-del:hover:not(:disabled) { border-color: var(--red); color: var(--red); background: rgba(224,92,42,0.08); }
+
+  .ex-name { cursor: pointer; flex: 1; }
+  .ex-name:hover { color: var(--accent); }
+  .ex-name-input {
+    background: var(--surface2); border: 1px solid var(--accent);
+    border-radius: 3px; padding: 3px 8px; color: var(--text);
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 1.05rem; letter-spacing: 0.05em; width: 100%; outline: none;
+  }
+
+  .edit-hint { font-size: 0.7rem; color: var(--text-dim); font-style: italic; text-transform: none; letter-spacing: 0; }
+  .ex-detail { cursor: pointer; }
+  .ex-detail:hover { border-color: var(--accent); }
+  .ex-detail-edit {
+    width: 100%; min-height: 80px;
+    background: var(--surface2); border: 1px solid var(--accent);
+    border-radius: 4px; padding: 10px 12px; color: var(--text);
+    font-family: 'Barlow', sans-serif; font-size: 0.88rem; line-height: 1.7;
+    resize: vertical; outline: none; margin-bottom: 10px;
+  }
+
+  .btn-add-exercise {
+    width: 100%; margin-top: 8px; padding: 12px;
+    background: none; border: 2px dashed var(--border);
+    border-radius: 6px; color: var(--text-muted);
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.9rem;
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .btn-add-exercise:hover { border-color: var(--accent); color: var(--accent); background: rgba(232,200,74,0.04); }
+
+  /* ── PROGRESS ── */
+  .progress-bar-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 16px 18px; margin-bottom: 20px; }
+  .progress-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; display: flex; justify-content: space-between; }
+  .progress-track { height: 6px; background: var(--surface3); border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent)); border-radius: 3px; transition: width 0.4s ease; }
+
+  /* ── BLOCKS LIST ── */
+  .blocks-list { display: flex; flex-direction: column; gap: 10px; }
+  .block-item {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 6px; padding: 16px 20px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    transition: border-color 0.15s; cursor: pointer;
+  }
+  .block-item:hover { border-color: var(--accent); }
+  .block-item .bi-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.05em; }
+  .block-item .bi-meta { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+  .block-item-actions { display: flex; gap: 8px; }
+
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+  .empty-state .es-icon { font-size: 3rem; margin-bottom: 16px; opacity: 0.4; }
+  .empty-state h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.1em; margin-bottom: 8px; }
+  .empty-state p { font-size: 0.9rem; }
+
+  /* ── MODAL ── */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 28px; width: 100%; max-width: 420px; }
+  .modal h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.08em; margin-bottom: 16px; color: var(--accent); }
+  .modal input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 3px; padding: 10px 14px; color: var(--text); font-family: 'Barlow', sans-serif; font-size: 0.95rem; outline: none; margin-bottom: 16px; }
+  .modal input:focus { border-color: var(--accent); }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+
+  /* ── BACKUP PANEL ── */
+  .backup-section {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 6px; padding: 24px; margin-bottom: 20px;
+  }
+  .backup-section-title {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 1.1rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text); margin-bottom: 8px;
+  }
+  .backup-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px; }
+  .backup-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .pdf-controls { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; margin-bottom: 16px; }
+  .pdf-control-group { display: flex; flex-direction: column; gap: 6px; }
+  .pdf-control-group label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+  .pdf-control-group select {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 3px;
+    padding: 9px 14px; color: var(--text); font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem; outline: none; cursor: pointer; min-width: 200px;
+    transition: border-color 0.15s;
+  }
+  .pdf-control-group select:focus { border-color: var(--accent); }
+  .pdf-hint {
+    display: flex; gap: 10px; align-items: flex-start;
+    background: var(--surface2); border: 1px solid var(--surface3);
+    border-radius: 4px; padding: 12px 14px;
+    font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;
+  }
+  .pdf-hint strong { color: var(--text); }
+
+  /* ── PRINT STYLES ── */
+  @media print {
+    body::before { display: none !important; }
+    header, .tab-bar, .main > .panel:not(#panel-print-target) { display: none !important; }
+    #print-frame { display: block !important; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  }
+
+  /* ── PRINT FRAME ── */
+  #print-frame { display: none; }
+
+  @media print {
+    #print-frame {
+      display: block !important;
+      position: fixed; inset: 0; background: #fff; z-index: 9000;
+      padding: 0; margin: 0;
+    }
+  }
+
+  /* Print content styles (inside iframe/new window) */
+  .print-doc { font-family: 'Barlow', Georgia, serif; color: #111; background: #fff; max-width: 780px; margin: 0 auto; padding: 32px 28px; }
+  .print-doc h1 { font-size: 2rem; font-weight: 900; letter-spacing: 0.04em; border-bottom: 4px solid #111; padding-bottom: 8px; margin-bottom: 4px; }
+  .print-doc .print-meta { font-size: 0.8rem; color: #666; margin-bottom: 28px; }
+  .print-doc .print-week-title { font-size: 1.3rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; background: #111; color: #fff; padding: 6px 14px; margin: 24px 0 10px; display: inline-block; }
+  .print-doc .print-day-title { font-size: 1rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-left: 4px solid #111; padding-left: 10px; margin: 16px 0 6px; }
+  .print-doc .print-ex { border: 1px solid #ddd; border-radius: 4px; padding: 10px 14px; margin-bottom: 8px; page-break-inside: avoid; }
+  .print-doc .print-ex-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+  .print-doc .print-ex-name .check-box { width: 14px; height: 14px; border: 2px solid #555; border-radius: 2px; display: inline-block; flex-shrink: 0; }
+  .print-doc .print-ex-name .check-box.done { background: #2a9d5c; border-color: #2a9d5c; }
+  .print-doc .print-ex-detail { font-size: 0.82rem; color: #444; line-height: 1.6; white-space: pre-line; }
+  .print-doc .print-ex-comment { font-size: 0.8rem; color: #777; margin-top: 5px; font-style: italic; border-top: 1px dashed #ddd; padding-top: 5px; }
+  .print-doc .print-notes-line { border: none; border-bottom: 1px dashed #ccc; width: 100%; margin: 6px 0 2px; display: block; height: 16px; }
+  .print-doc .rest-day-print { color: #999; font-style: italic; font-size: 0.9rem; padding: 6px 14px; }
+  .print-doc .print-footer { margin-top: 32px; border-top: 1px solid #ddd; padding-top: 12px; font-size: 0.75rem; color: #aaa; text-align: center; }
+
+  /* ── MODE TOGGLE ── */
+  .mode-toggle {
+    display: flex; gap: 0; margin-bottom: 24px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    overflow: hidden; width: fit-content;
+  }
+  .mode-btn {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.9rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 11px 22px; background: none; border: none; color: var(--text-muted);
+    cursor: pointer; transition: all 0.15s; border-right: 1px solid var(--border);
+  }
+  .mode-btn:last-child { border-right: none; }
+  .mode-btn:hover { color: var(--text); background: var(--surface2); }
+  .mode-btn.active { background: var(--accent); color: #000; }
+
+  /* ── IMPORT DEST ROW ── */
+  .import-dest-row {
+    display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-end;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 6px; padding: 16px 20px; margin-bottom: 20px;
+  }
+  .import-dest-group { display: flex; flex-direction: column; gap: 6px; }
+  .import-dest-group label {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted);
+  }
+  .import-dest-group select, .import-dest-group input[type=number] {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 3px;
+    padding: 9px 14px; color: var(--text); font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem; outline: none; cursor: pointer; transition: border-color 0.15s;
+  }
+  .import-dest-group select { min-width: 220px; }
+  .import-dest-group input[type=number] { width: 90px; }
+  .import-dest-group select:focus, .import-dest-group input:focus { border-color: var(--accent); }
+
+  /* ── COPY PANEL ── */
+  .copy-week-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 6px; padding: 20px; margin-bottom: 16px;
+  }
+  .copy-row { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 16px; }
+
+  .copy-preview { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+  .copy-preview-title {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px;
+  }
+  .copy-preview-days { display: flex; flex-wrap: wrap; gap: 8px; }
+  .copy-day-chip {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 4px; padding: 8px 14px;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem;
+  }
+  .copy-day-chip .chip-day { font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; }
+  .copy-day-chip .chip-count { color: var(--text-muted); font-size: 0.78rem; margin-top: 2px; }
+
+  .copy-options { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--surface3); }
+  .copy-check-label {
+    display: flex; align-items: center; gap: 8px; cursor: pointer;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.88rem; color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+  .copy-check-label input[type=checkbox] { accent-color: var(--accent); width: 15px; height: 15px; cursor: pointer; }
+  .copy-check-label:hover { color: var(--text); }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  /* anim */
+  @keyframes fadeIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
+  .panel.active { animation: fadeIn 0.2s ease; }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo-wrap">
-    <div class="logo">bearly<span class="logo-accent">teals</span></div>
-    <div class="logo-sub">A Gentlewoman's Fibre Companion</div>
+  <div class="logo">Bombers Shed <span>// Training Log</span></div>
+  <div class="header-right">
+    <button class="btn btn-secondary" onclick="showModal('new-block-modal')">+ New Block</button>
   </div>
-  <div class="header-orn">— ✦ —</div>
-  <nav>
-    <button class="tab-btn active"  onclick="switchTab('current')">Current Projects</button>
-    <button class="tab-btn"         onclick="switchTab('future')">Future Ideas</button>
-    <button class="tab-btn"         onclick="switchTab('stash')">Yarn</button>
-    <button class="tab-btn"         onclick="switchTab('backup')">Backup</button>
-  </nav>
 </header>
 
-<main>
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('blocks')">Blocks</button>
+  <button class="tab-btn" id="program-tab" onclick="switchTab('program')" style="display:none">Program</button>
+  <button class="tab-btn" onclick="switchTab('import')">Import Week</button>
+  <button class="tab-btn" onclick="switchTab('backup')">Backup</button>
+</div>
 
-  <!-- CURRENT PROJECTS -->
-  <div class="tab-panel active" id="tab-current">
-    <div id="stats-current" class="stats-strip" style="display:none;"></div>
-    <div class="section-header">
-      <div style="display:flex;align-items:baseline;gap:8px;">
-        <h1 class="section-title">Current <em>Projects</em></h1>
-        <span class="section-subtitle">Works in Progress</span>
-      </div>
-      <button class="btn-primary" onclick="openAddProject()">New Project</button>
-    </div>
-    <div class="cards-grid" id="current-projects-grid">
-      <div class="empty-state" id="current-empty">
-        <span class="empty-icon">&#9774;</span>
-        <h3>No Projects Yet</h3>
-        <p>Cast on your first project to begin your record.</p>
-        <button class="btn-primary" onclick="openAddProject()">Add Project</button>
-      </div>
-    </div>
+<div class="main">
+
+  <!-- BLOCKS PANEL -->
+  <div class="panel active" id="panel-blocks">
+    <div class="section-title">Your Training Blocks</div>
+    <div class="section-sub">A block is a 12-week program. Select one to start training.</div>
+    <div class="blocks-list" id="blocks-list"></div>
   </div>
 
-  <!-- FUTURE IDEAS -->
-  <div class="tab-panel" id="tab-future">
-    <div class="section-header">
-      <div style="display:flex;align-items:baseline;gap:8px;">
-        <h1 class="section-title">Future <em>Ideas</em></h1>
-        <span class="section-subtitle">The Queue &amp; Wishlist</span>
-      </div>
-      <button class="btn-primary" onclick="openAddFuture()">Add Idea</button>
-    </div>
-    <div class="cards-grid" id="future-projects-grid">
-      <div class="empty-state" id="future-empty">
-        <span class="empty-icon">&#10022;</span>
-        <h3>No Ideas Saved</h3>
-        <p>Preserve your inspiration and plan future makes herein.</p>
-        <button class="btn-primary" onclick="openAddFuture()">Add Idea</button>
-      </div>
-    </div>
+  <!-- PROGRAM PANEL -->
+  <div class="panel" id="panel-program">
+    <div id="program-content"></div>
   </div>
 
-  <!-- YARN STASH -->
-  <div class="tab-panel" id="tab-stash">
-    <div id="stash-stats" class="stats-strip" style="display:none;"></div>
-    <div class="section-header">
-      <div style="display:flex;align-items:baseline;gap:8px;">
-        <h1 class="section-title">The <em>Yarn</em></h1>
-        <span class="section-subtitle">Stash Inventory</span>
-      </div>
-      <button class="btn-primary" onclick="openAddYarn()">Add Yarn</button>
-    </div>
-    <div class="stash-grid" id="yarn-grid">
-      <div class="empty-state" id="stash-empty">
-        <span class="empty-icon">&#9775;</span>
-        <h3>Stash is Empty</h3>
-        <p>Add your yarn to track what you have on hand.</p>
-        <button class="btn-primary" onclick="openAddYarn()">Add Yarn</button>
-      </div>
-    </div>
-  </div>
+  <!-- IMPORT PANEL -->
+  <div class="panel" id="panel-import">
+    <div class="section-title">Add Week</div>
+    <div class="section-sub">Import from your trainer's text, or copy an existing week from any block.</div>
 
-  <!-- BACKUP -->
-  <div class="tab-panel" id="tab-backup">
-    <div class="section-header">
-      <div style="display:flex;align-items:baseline;gap:8px;">
-        <h1 class="section-title">Backup &amp; <em>Restore</em></h1>
-        <span class="section-subtitle">Data Management</span>
+    <!-- Mode Toggle -->
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="mode-btn-import" onclick="switchImportMode('import')">📋 Import from Text</button>
+      <button class="mode-btn" id="mode-btn-copy" onclick="switchImportMode('copy')">📑 Copy Existing Week</button>
+    </div>
+
+    <!-- Destination row (shared) -->
+    <div class="import-dest-row">
+      <div class="import-dest-group">
+        <label>Destination Block</label>
+        <select id="import-block-select">
+          <option value="">— Select block —</option>
+        </select>
+      </div>
+      <div class="import-dest-group">
+        <label>Save as Week #</label>
+        <input type="number" id="import-week" value="1" min="1" max="12">
       </div>
     </div>
 
-    <div class="data-summary" id="backup-summary"></div>
-
-    <!-- Export -->
-    <div class="backup-section">
-      <h2>Export Your Data</h2>
-      <p>Download a complete JSON backup of all your projects, future ideas, and yarn stash. Keep this file safe — it contains everything.</p>
-      <div class="backup-actions">
-        <button class="btn-backup" onclick="exportAll()">Download Full Backup (.json)</button>
-        <button class="btn-backup" onclick="exportProjects()">Export Projects Only</button>
-        <button class="btn-backup" onclick="exportYarn()">Export Yarn Stash Only</button>
-      </div>
-      <div class="backup-status" id="export-status"></div>
-    </div>
-
-    <!-- Import -->
-    <div class="backup-section">
-      <h2>Import / Restore</h2>
-      <p>Restore from a previous backup. Choose whether to replace all data or merge with your existing records. Importing will not overwrite items with matching IDs unless you choose to replace.</p>
-      <div class="backup-actions">
-        <button class="btn-backup" onclick="document.getElementById('import-file').click()">Choose Backup File to Import</button>
-      </div>
-      <div class="backup-drop-zone">
-        <input type="file" id="import-file" accept=".json" onchange="handleImport(this)">
-        <p>Or drop your .json backup file here</p>
-      </div>
-      <div id="import-preview" style="display:none;">
-        <textarea class="json-preview" id="import-json-preview" readonly></textarea>
-        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">
-          <button class="btn-backup" onclick="confirmImport('merge')">Merge with Existing Data</button>
-          <button class="btn-backup" onclick="confirmImport('replace')">Replace All Data</button>
-          <button class="btn-cancel" onclick="cancelImport()">Cancel</button>
+    <!-- ── MODE A: Import from text ── -->
+    <div id="import-mode-import">
+      <div class="import-grid">
+        <div class="import-box">
+          <h3>📋 Paste Text</h3>
+          <textarea id="paste-input" placeholder="Paste your weekly workout here...&#10;&#10;Monday&#10;&#10;• Mobility work...&#10;• Anti-Rotation...&#10;&#10;Tuesday&#10;..."></textarea>
         </div>
-      </div>
-      <div class="backup-status" id="import-status"></div>
-    </div>
-
-    <!-- Clear -->
-    <div class="backup-section">
-      <h2>Clear All Data</h2>
-      <p>Permanently remove all projects, ideas, and yarn from this device. This cannot be undone — export a backup first.</p>
-      <div class="backup-actions">
-        <button class="btn-backup danger" onclick="clearAll()">Clear All Data</button>
-      </div>
-    </div>
-
-    <!-- JSON viewer -->
-    <div class="backup-section">
-      <h2>View Raw Data</h2>
-      <p>Inspect the raw JSON currently stored in your browser. Useful for troubleshooting or manual editing.</p>
-      <div class="backup-actions">
-        <button class="btn-backup" onclick="showRawData()">Show Raw JSON</button>
-        <button class="btn-backup" onclick="hideRawData()">Hide</button>
-      </div>
-      <textarea class="json-preview" id="raw-json-view" style="display:none;" readonly></textarea>
-    </div>
-
-  </div>
-
-</main>
-
-<!-- PROJECT MODAL -->
-<div class="modal-overlay" id="modal-project">
-  <div class="modal">
-    <div class="modal-header">
-      <span class="modal-title" id="modal-project-title">New Project</span>
-      <button class="modal-close" onclick="closeModal('modal-project')">x</button>
-    </div>
-    <div class="modal-body">
-      <div class="form-row">
-        <div class="form-group">
-          <label>Project Name *</label>
-          <input type="text" id="p-name" placeholder="e.g. Grandmother's Cardigan">
-        </div>
-        <div class="form-group">
-          <label>Status</label>
-          <select id="p-status">
-            <option value="active">Active</option>
-            <option value="paused">Paused</option>
-            <option value="complete">Complete</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Craft Type</label>
-          <select id="p-craft">
-            <option value="Knitting">Knitting</option>
-            <option value="Crochet">Crochet</option>
-            <option value="Both">Both</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Hook / Needle Size</label>
-          <input type="text" id="p-hook" placeholder="e.g. 4.0mm, 6.5mm">
-        </div>
-      </div>
-
-      <div class="form-section-title">Fibre</div>
-      <div class="form-row triple">
-        <div class="form-group">
-          <label>Fibre Content</label>
-          <input type="text" id="p-fibre" placeholder="e.g. 100% Merino">
-        </div>
-        <div class="form-group">
-          <label>Weight / Ply</label>
-          <select id="p-weight">
-            <optgroup label="Standard Weights">
-              <option value="Lace">Lace (0)</option>
-              <option value="Fingering">Fingering (1)</option>
-              <option value="Sport">Sport (2)</option>
-              <option value="DK" selected>DK (3)</option>
-              <option value="Worsted / Aran">Worsted / Aran (4)</option>
-              <option value="Bulky">Bulky (5)</option>
-              <option value="Super Bulky">Super Bulky (6)</option>
-              <option value="Jumbo">Jumbo (7)</option>
-            </optgroup>
-            <optgroup label="By Ply">
-              <option value="1 Ply (Cobweb)">1 Ply (Cobweb)</option>
-              <option value="2 Ply">2 Ply</option>
-              <option value="3 Ply">3 Ply</option>
-              <option value="4 Ply">4 Ply</option>
-              <option value="5 Ply">5 Ply</option>
-              <option value="6 Ply">6 Ply</option>
-              <option value="8 Ply (DK)">8 Ply (DK)</option>
-              <option value="10 Ply (Worsted)">10 Ply (Worsted)</option>
-              <option value="12 Ply (Chunky)">12 Ply (Chunky)</option>
-              <option value="14 Ply (Bulky)">14 Ply (Bulky)</option>
-            </optgroup>
-            <optgroup label="Handspun">
-              <option value="Handspun — Fine">Handspun — Fine</option>
-              <option value="Handspun — Medium">Handspun — Medium</option>
-              <option value="Handspun — Bulky">Handspun — Bulky</option>
-              <option value="Handspun — Art Yarn">Handspun — Art Yarn</option>
-            </optgroup>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Yarn Name</label>
-          <input type="text" id="p-yarn" placeholder="e.g. Malabrigo Rios">
-          <span class="hint">Comma-separate multiple yarns</span>
-        </div>
-      </div>
-
-      <div class="form-section-title">Pattern</div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Pattern Name / Link</label>
-          <input type="text" id="p-pattern-link" placeholder="Name or URL">
-        </div>
-        <div class="form-group">
-          <label>PDF Attachment</label>
-          <div class="photo-upload">
-            <input type="file" accept=".pdf" id="p-pdf" onchange="handlePdfUpload(this)">
-            <div class="photo-upload-icon">PDF</div>
-            <p>Click to attach PDF</p>
+        <div class="import-box">
+          <h3>📁 Upload File</h3>
+          <div class="file-drop" id="file-drop" onclick="document.getElementById('file-input').click()">
+            <div class="drop-icon">📄</div>
+            <p>Drop .txt file here<br>or click to browse</p>
+            <small>Supports .txt files</small>
           </div>
-          <span id="pdf-name" style="font-size:10px;color:var(--accent-mid);margin-top:4px;display:none;font-style:italic;font-family:'Playfair Display',serif;"></span>
+          <input type="file" id="file-input" accept=".txt">
         </div>
       </div>
-
-      <div class="form-section-title">Dates &amp; Progress</div>
-      <div class="form-row triple">
-        <div class="form-group">
-          <label>Start Date</label>
-          <input type="date" id="p-start">
-        </div>
-        <div class="form-group">
-          <label>Goal End Date</label>
-          <input type="date" id="p-goal">
-        </div>
-        <div class="form-group">
-          <label>Actual End Date</label>
-          <input type="date" id="p-end">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Progress % (0–100)</label>
-          <input type="number" id="p-progress" min="0" max="100" value="0">
-        </div>
-        <div class="form-group">
-          <label>Total Rows / Rounds</label>
-          <input type="number" id="p-total-rows" min="0" placeholder="e.g. 120">
-        </div>
-      </div>
-
-      <div class="form-section-title">Photograph</div>
-      <div class="form-group">
-        <div class="photo-upload">
-          <input type="file" accept="image/*" id="p-photo" onchange="handlePhotoUpload(this,'p-photo-preview')">
-          <div class="photo-upload-icon">IMG</div>
-          <p>Click to add a photograph</p>
-        </div>
-        <img id="p-photo-preview" class="photo-preview">
-      </div>
-
-      <div class="form-section-title">Notes &amp; Journal</div>
-      <div class="form-group">
-        <label>Opening Notes</label>
-        <textarea id="p-notes" placeholder="Record your thoughts, modifications, intentions…"></textarea>
+      <div class="import-actions">
+        <button class="btn btn-primary" onclick="importWorkout()">Import Week</button>
+        <button class="btn btn-secondary" onclick="clearImport()">Clear</button>
       </div>
     </div>
-    <div class="modal-footer">
-      <button class="btn-cancel" onclick="closeModal('modal-project')">Cancel</button>
-      <button class="btn-primary" onclick="saveProject()">Save Project</button>
+
+    <!-- ── MODE B: Copy existing week ── -->
+    <div id="import-mode-copy" style="display:none">
+      <div class="copy-week-card">
+        <div class="copy-row">
+          <div class="import-dest-group">
+            <label>Copy from Block</label>
+            <select id="copy-source-block" onchange="onCopyBlockChange()">
+              <option value="">— Select source block —</option>
+            </select>
+          </div>
+          <div class="import-dest-group">
+            <label>Week to Copy</label>
+            <select id="copy-source-week">
+              <option value="">— Select week —</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Week preview -->
+        <div id="copy-preview" class="copy-preview" style="display:none">
+          <div class="copy-preview-title">Week Preview</div>
+          <div id="copy-preview-days" class="copy-preview-days"></div>
+        </div>
+
+        <div class="copy-options">
+          <label class="copy-check-label">
+            <input type="checkbox" id="copy-include-progress"> Copy progress (ticked exercises)
+          </label>
+          <label class="copy-check-label">
+            <input type="checkbox" id="copy-include-notes"> Copy notes &amp; comments
+          </label>
+        </div>
+      </div>
+
+      <div class="import-actions">
+        <button class="btn btn-primary" onclick="copyWeek()">Copy Week</button>
+      </div>
+    </div>
+
+    <div id="import-alert"></div>
+  </div>
+
+  <!-- BACKUP PANEL -->
+  <div class="panel" id="panel-backup">
+    <div class="section-title">Backup &amp; Export</div>
+    <div class="section-sub">Save your data as JSON or print a clean PDF of any block or week.</div>
+
+    <div class="backup-section">
+      <div class="backup-section-title">💾 JSON Backup</div>
+      <p class="backup-desc">Export all your blocks, weeks, progress and notes to a JSON file. Use this to restore your data or transfer to another device.</p>
+      <div class="backup-row">
+        <button class="btn btn-primary" onclick="exportJSON()">⬇ Download Backup</button>
+        <div style="position:relative">
+          <button class="btn btn-secondary" onclick="document.getElementById('restore-input').click()">⬆ Restore from JSON</button>
+          <input type="file" id="restore-input" accept=".json" style="display:none" onchange="restoreJSON(event)">
+        </div>
+      </div>
+      <div id="backup-alert"></div>
+    </div>
+
+    <div class="backup-section">
+      <div class="backup-section-title">🖨 Print to PDF</div>
+      <p class="backup-desc">Generate a clean, print-ready layout. Select a block and optionally a specific week. Leave week as "All weeks" to print the entire block.</p>
+      <div class="pdf-controls">
+        <div class="pdf-control-group">
+          <label>Block</label>
+          <select id="pdf-block-select" onchange="onPdfBlockChange()">
+            <option value="">— Select block —</option>
+          </select>
+        </div>
+        <div class="pdf-control-group">
+          <label>Week <span style="color:var(--text-dim);font-size:0.75rem">(optional)</span></label>
+          <select id="pdf-week-select">
+            <option value="">All weeks</option>
+          </select>
+        </div>
+        <div class="pdf-control-group" style="align-self:flex-end">
+          <button class="btn btn-primary" onclick="printPDF()">🖨 Print / Save PDF</button>
+        </div>
+      </div>
+      <div class="pdf-hint">
+        <span>💡</span>
+        <span>When the print dialog opens, select <strong>"Save as PDF"</strong> as the destination. Set margins to <strong>Minimum</strong> for best results.</span>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- FUTURE MODAL -->
-<div class="modal-overlay" id="modal-future">
+</div><!-- /main -->
+
+<!-- New Block Modal -->
+<div class="modal-overlay" id="new-block-modal">
   <div class="modal">
-    <div class="modal-header">
-      <span class="modal-title" id="modal-future-title">New Idea</span>
-      <button class="modal-close" onclick="closeModal('modal-future')">x</button>
-    </div>
-    <div class="modal-body">
-      <div class="form-row">
-        <div class="form-group">
-          <label>Name *</label>
-          <input type="text" id="f-name" placeholder="e.g. Cabled Throw Blanket">
-        </div>
-        <div class="form-group">
-          <label>Craft Type</label>
-          <select id="f-craft">
-            <option value="Knitting">Knitting</option>
-            <option value="Crochet">Crochet</option>
-            <option value="Both">Both</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-section-title">Inspiration</div>
-      <div class="form-group">
-        <label>Description &amp; Inspiration</label>
-        <textarea id="f-inspo" placeholder="What inspired this? The look, colours, feeling you are imagining…"></textarea>
-      </div>
-      <div class="form-group" style="margin-top:10px;">
-        <label>Inspiration Image</label>
-        <div class="photo-upload">
-          <input type="file" accept="image/*" id="f-photo" onchange="handlePhotoUpload(this,'f-photo-preview')">
-          <div class="photo-upload-icon">IMG</div>
-          <p>Click to add an image</p>
-        </div>
-        <img id="f-photo-preview" class="photo-preview">
-      </div>
-
-      <div class="form-section-title">Pattern</div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Pattern Name / Link</label>
-          <input type="text" id="f-pattern" placeholder="Name or URL">
-        </div>
-        <div class="form-group">
-          <label>Hook / Needle Size</label>
-          <input type="text" id="f-hook" placeholder="e.g. 5.0mm">
-        </div>
-      </div>
-
-      <div class="form-section-title">Yarn from Stash</div>
-      <div class="form-group">
-        <label>Link Yarn from Your Stash</label>
-        <select id="f-yarn-select"><option value="">— Select from stash —</option></select>
-        <button class="btn-small" style="margin-top:6px;width:fit-content;" onclick="addLinkedYarn()">Link Yarn</button>
-        <div id="f-linked-yarns"></div>
-      </div>
-
-      <div class="form-section-title">Planned Dates</div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Potential Start Date</label>
-          <input type="date" id="f-start">
-        </div>
-        <div class="form-group">
-          <label>Potential End Date</label>
-          <input type="date" id="f-end">
-        </div>
-      </div>
-      <div class="form-group" style="margin-top:10px;">
-        <label>Additional Notes</label>
-        <textarea id="f-notes" placeholder="Sizing, colour combinations, any other thoughts…"></textarea>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-cancel" onclick="closeModal('modal-future')">Cancel</button>
-      <button class="btn-primary" onclick="saveFuture()">Save Idea</button>
+    <h3>New Training Block</h3>
+    <label style="font-family:'Barlow Condensed',sans-serif;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:6px">Block Name</label>
+    <input type="text" id="new-block-name" placeholder="e.g. Block 1 — Foundation" maxlength="60">
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="hideModal('new-block-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="createBlock()">Create Block</button>
     </div>
   </div>
 </div>
-
-<!-- YARN MODAL -->
-<div class="modal-overlay" id="modal-yarn">
-  <div class="modal">
-    <div class="modal-header">
-      <span class="modal-title">Add Yarn to Stash</span>
-      <button class="modal-close" onclick="closeModal('modal-yarn')">x</button>
-    </div>
-    <div class="modal-body">
-      <div class="form-row">
-        <div class="form-group">
-          <label>Yarn Name *</label>
-          <input type="text" id="y-name" placeholder="e.g. Malabrigo Rios">
-        </div>
-        <div class="form-group">
-          <label>Brand</label>
-          <input type="text" id="y-brand" placeholder="e.g. Malabrigo">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Colourway Name</label>
-          <input type="text" id="y-colour" placeholder="e.g. Cereza">
-        </div>
-        <div class="form-group">
-          <label>Colour Swatch</label>
-          <input type="color" id="y-swatch" value="#1B6B6B" style="height:36px;padding:2px 4px;cursor:pointer;border:1px solid var(--border-light);background:var(--parchment);">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Weight / Type</label>
-          <select id="y-weight">
-            <optgroup label="Standard Weights">
-              <option value="Lace">Lace (0)</option>
-              <option value="Fingering / Sock">Fingering / Sock (1)</option>
-              <option value="Sport">Sport (2)</option>
-              <option value="DK" selected>DK (3)</option>
-              <option value="Worsted / Aran">Worsted / Aran (4)</option>
-              <option value="Bulky">Bulky (5)</option>
-              <option value="Super Bulky">Super Bulky (6)</option>
-              <option value="Jumbo">Jumbo (7)</option>
-            </optgroup>
-            <optgroup label="By Ply">
-              <option value="1 Ply (Cobweb)">1 Ply (Cobweb)</option>
-              <option value="2 Ply">2 Ply</option>
-              <option value="3 Ply">3 Ply</option>
-              <option value="4 Ply">4 Ply</option>
-              <option value="5 Ply">5 Ply</option>
-              <option value="6 Ply">6 Ply</option>
-              <option value="8 Ply (DK)">8 Ply (DK)</option>
-              <option value="10 Ply (Worsted)">10 Ply (Worsted)</option>
-              <option value="12 Ply (Chunky)">12 Ply (Chunky)</option>
-              <option value="14 Ply (Bulky)">14 Ply (Bulky)</option>
-            </optgroup>
-            <optgroup label="Handspun">
-              <option value="Handspun — Fine">Handspun — Fine</option>
-              <option value="Handspun — Medium">Handspun — Medium</option>
-              <option value="Handspun — Bulky">Handspun — Bulky</option>
-              <option value="Handspun — Art Yarn">Handspun — Art Yarn</option>
-              <option value="Handspun — Fingering">Handspun — Fingering Weight</option>
-              <option value="Handspun — Worsted">Handspun — Worsted Weight</option>
-            </optgroup>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Fibre Content</label>
-          <input type="text" id="y-fibre" placeholder="e.g. 100% Merino">
-        </div>
-      </div>
-      <div class="form-row triple">
-        <div class="form-group">
-          <label>Skeins / Balls</label>
-          <input type="number" id="y-qty" min="1" value="1">
-        </div>
-        <div class="form-group">
-          <label>Metres per Skein</label>
-          <input type="number" id="y-metres" placeholder="e.g. 200">
-        </div>
-        <div class="form-group">
-          <label>Availability</label>
-          <select id="y-avail">
-            <option value="available">Available</option>
-            <option value="allocated">Allocated</option>
-            <option value="used">Used Up</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group" style="margin-top:8px;">
-        <label>Notes</label>
-        <textarea id="y-notes" placeholder="Provenance, dye lot, care instructions, intended projects…" style="min-height:60px;"></textarea>
-      </div>
-      <div class="form-section-title">Photograph</div>
-      <div class="form-group">
-        <div class="photo-upload">
-          <input type="file" accept="image/*" id="y-photo" onchange="handlePhotoUpload(this,'y-photo-preview')">
-          <div class="photo-upload-icon">IMG</div>
-          <p>Click to add a photo of this yarn</p>
-        </div>
-        <img id="y-photo-preview" class="photo-preview" style="height:120px;">
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-cancel" onclick="closeModal('modal-yarn')">Cancel</button>
-      <button class="btn-primary" onclick="saveYarn()">Add to Stash</button>
-    </div>
-  </div>
-</div>
-
-<!-- SVG CORNER ORNAMENT (hidden template) -->
-<svg style="display:none" id="corner-svg-tpl">
-  <symbol id="corner-orn" viewBox="0 0 22 22">
-    <path d="M2 2 L10 2 Q12 2 12 4 L12 10" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="2" cy="2" r="1.5" fill="currentColor"/>
-    <circle cx="12" cy="10" r="1" fill="currentColor"/>
-    <path d="M4 5 Q7 5 7 8" stroke-linecap="round"/>
-  </symbol>
-</svg>
 
 <script>
-// ─── Data ────────────────────────────────────────────────
-let projects = JSON.parse(localStorage.getItem('bt_projects') || '[]');
-let futures  = JSON.parse(localStorage.getItem('bt_futures')  || '[]');
-let yarns    = JSON.parse(localStorage.getItem('bt_yarns')    || '[]');
-let editingId = null;
-let tempLinkedYarns = [];
-let pdfDataUrl = null;
-let photoDataUrl = null;
-let futurePhotoDataUrl = null;
-let pendingImportData = null;
-let yarnPhotoDataUrl = null;
+// ── STATE ──────────────────────────────────────────────────
+let state = JSON.parse(localStorage.getItem('bombers-shed') || '{}');
+// state = { blocks: [ { id, name, weeks: { 1: {days}, 2: ... }, progress: {} } ] }
+if (!state.blocks) state.blocks = [];
+if (!state.activeBlock) state.activeBlock = null;
+if (!state.activeWeek) state.activeWeek = 1;
+if (!state.activeDay) state.activeDay = 'monday';
 
-function save() {
-  localStorage.setItem('bt_projects', JSON.stringify(projects));
-  localStorage.setItem('bt_futures',  JSON.stringify(futures));
-  localStorage.setItem('bt_yarns',    JSON.stringify(yarns));
-}
+const DAYS = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
 
-// ─── Ornate frame builder ─────────────────────────────────
-function makeFrame(cardHTML, extraClass) {
-  return `
-    <div class="frame-outer${extraClass?' '+extraClass:''}">
-      <svg class="frame-corner tl corner-svg" viewBox="0 0 22 22">
-        <path d="M2 2L10 2Q12 2 12 4L12 10" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="var(--frame-gold-shine)" stroke-width="1.2"/>
-        <circle cx="2" cy="2" r="1.5" fill="var(--frame-gold-shine)"/>
-        <circle cx="12" cy="10" r="1" fill="var(--frame-gold-shine)"/>
-        <path d="M4 5Q7 5 7 8" stroke-linecap="round" fill="none" stroke="var(--frame-gold-light)" stroke-width="0.8"/>
-      </svg>
-      <svg class="frame-corner tr corner-svg" viewBox="0 0 22 22" style="transform:scaleX(-1)">
-        <path d="M2 2L10 2Q12 2 12 4L12 10" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="var(--frame-gold-shine)" stroke-width="1.2"/>
-        <circle cx="2" cy="2" r="1.5" fill="var(--frame-gold-shine)"/>
-        <circle cx="12" cy="10" r="1" fill="var(--frame-gold-shine)"/>
-        <path d="M4 5Q7 5 7 8" stroke-linecap="round" fill="none" stroke="var(--frame-gold-light)" stroke-width="0.8"/>
-      </svg>
-      <svg class="frame-corner bl corner-svg" viewBox="0 0 22 22" style="transform:scaleY(-1)">
-        <path d="M2 2L10 2Q12 2 12 4L12 10" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="var(--frame-gold-shine)" stroke-width="1.2"/>
-        <circle cx="2" cy="2" r="1.5" fill="var(--frame-gold-shine)"/>
-        <circle cx="12" cy="10" r="1" fill="var(--frame-gold-shine)"/>
-        <path d="M4 5Q7 5 7 8" stroke-linecap="round" fill="none" stroke="var(--frame-gold-light)" stroke-width="0.8"/>
-      </svg>
-      <svg class="frame-corner br corner-svg" viewBox="0 0 22 22" style="transform:scale(-1,-1)">
-        <path d="M2 2L10 2Q12 2 12 4L12 10" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="var(--frame-gold-shine)" stroke-width="1.2"/>
-        <circle cx="2" cy="2" r="1.5" fill="var(--frame-gold-shine)"/>
-        <circle cx="12" cy="10" r="1" fill="var(--frame-gold-shine)"/>
-        <path d="M4 5Q7 5 7 8" stroke-linecap="round" fill="none" stroke="var(--frame-gold-light)" stroke-width="0.8"/>
-      </svg>
-      <div class="project-card">${cardHTML}</div>
-    </div>`;
-}
+function save() { localStorage.setItem('bombers-shed', JSON.stringify(state)); }
 
-// ─── Tabs ─────────────────────────────────────────────────
-function switchTab(name) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+// ── TAB SWITCHING ───────────────────────────────────────────
+function switchTab(tab) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + name).classList.add('active');
-  const map = { current:'current', future:'future', stash:'yarn', backup:'backup' };
-  document.querySelectorAll('.tab-btn').forEach(b => {
-    if (b.textContent.toLowerCase().includes(map[name])) b.classList.add('active');
-  });
-  if (name === 'current') renderProjects();
-  if (name === 'future')  renderFutures();
-  if (name === 'stash')   renderYarns();
-  if (name === 'backup')  renderBackupSummary();
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('active');
+  if (tab === 'blocks') renderBlocksList();
+  if (tab === 'program') renderProgram();
+  if (tab === 'import') renderImportBlockSelect();
+  if (tab === 'backup') renderBackupSelects();
 }
 
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+// ── MODAL ───────────────────────────────────────────────────
+function showModal(id) { document.getElementById(id).classList.add('open'); }
+function hideModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); }));
 
-// ─── Open project modal ────────────────────────────────────
-function openAddProject(id) {
-  editingId = id || null;
-  pdfDataUrl = null; photoDataUrl = null;
-  ['p-name','p-status','p-craft','p-hook','p-fibre','p-weight','p-yarn','p-pattern-link','p-start','p-goal','p-end','p-progress','p-total-rows','p-notes'].forEach(f => {
-    const el = document.getElementById(f); if (el) el.value = '';
-  });
-  document.getElementById('p-progress').value = 0;
-  document.getElementById('p-photo-preview').style.display = 'none';
-  document.getElementById('pdf-name').style.display = 'none';
+// ── BLOCK MANAGEMENT ────────────────────────────────────────
+function createBlock() {
+  const name = document.getElementById('new-block-name').value.trim();
+  if (!name) return;
+  const id = Date.now().toString();
+  state.blocks.push({ id, name, weeks: {}, progress: {} });
+  save();
+  hideModal('new-block-modal');
+  document.getElementById('new-block-name').value = '';
+  renderBlocksList();
+  renderImportBlockSelect();
+  renderBackupSelects();
+}
 
-  if (id) {
-    const p = projects.find(x => x.id === id);
-    if (p) {
-      document.getElementById('p-name').value = p.name || '';
-      document.getElementById('p-status').value = p.status || 'active';
-      document.getElementById('p-craft').value = p.craft || 'Knitting';
-      document.getElementById('p-hook').value = p.hook || '';
-      document.getElementById('p-fibre').value = p.fibre || '';
-      document.getElementById('p-weight').value = p.weight || 'DK';
-      document.getElementById('p-yarn').value = p.yarn || '';
-      document.getElementById('p-pattern-link').value = p.patternLink || '';
-      document.getElementById('p-start').value = p.startDate || '';
-      document.getElementById('p-goal').value = p.goalDate || '';
-      document.getElementById('p-end').value = p.endDate || '';
-      document.getElementById('p-progress').value = p.progress || 0;
-      document.getElementById('p-total-rows').value = p.totalRows || '';
-      document.getElementById('p-notes').value = p.notes || '';
-      if (p.photo) { document.getElementById('p-photo-preview').src = p.photo; document.getElementById('p-photo-preview').style.display = 'block'; photoDataUrl = p.photo; }
-      if (p.pdfName) { document.getElementById('pdf-name').textContent = p.pdfName; document.getElementById('pdf-name').style.display = 'block'; }
-      pdfDataUrl = p.pdf || null;
-    }
+function deleteBlock(id) {
+  if (!confirm('Delete this block and all its data?')) return;
+  state.blocks = state.blocks.filter(b => b.id !== id);
+  if (state.activeBlock === id) { state.activeBlock = null; document.getElementById('program-tab').style.display = 'none'; }
+  save();
+  renderBlocksList();
+}
+
+function openBlock(id) {
+  state.activeBlock = id;
+  state.activeWeek = 1;
+  state.activeDay = 'monday';
+  save();
+  document.getElementById('program-tab').style.display = '';
+  // Switch to program tab
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('program-tab').classList.add('active');
+  document.getElementById('panel-program').classList.add('active');
+  renderProgram();
+}
+
+function renderBlocksList() {
+  const el = document.getElementById('blocks-list');
+  if (!state.blocks.length) {
+    el.innerHTML = `<div class="empty-state"><div class="es-icon">🏋️</div><h3>No Blocks Yet</h3><p>Create your first 12-week training block to get started.</p></div>`;
+    return;
   }
-  document.getElementById('modal-project-title').textContent = id ? 'Edit Project' : 'New Project';
-  document.getElementById('modal-project').classList.add('open');
-}
-
-function openAddFuture(id) {
-  editingId = id || null;
-  futurePhotoDataUrl = null; tempLinkedYarns = [];
-  ['f-name','f-craft','f-inspo','f-pattern','f-hook','f-start','f-end','f-notes'].forEach(f => {
-    const el = document.getElementById(f); if (el) el.value = '';
-  });
-  document.getElementById('f-photo-preview').style.display = 'none';
-  document.getElementById('f-linked-yarns').innerHTML = '';
-  if (id) {
-    const p = futures.find(x => x.id === id);
-    if (p) {
-      document.getElementById('f-name').value = p.name || '';
-      document.getElementById('f-craft').value = p.craft || 'Knitting';
-      document.getElementById('f-inspo').value = p.inspo || '';
-      document.getElementById('f-pattern').value = p.pattern || '';
-      document.getElementById('f-hook').value = p.hook || '';
-      document.getElementById('f-start').value = p.startDate || '';
-      document.getElementById('f-end').value = p.endDate || '';
-      document.getElementById('f-notes').value = p.notes || '';
-      if (p.photo) { document.getElementById('f-photo-preview').src = p.photo; document.getElementById('f-photo-preview').style.display = 'block'; futurePhotoDataUrl = p.photo; }
-      tempLinkedYarns = p.linkedYarns ? [...p.linkedYarns] : [];
-      renderLinkedYarns();
-    }
-  }
-  populateYarnSelect();
-  document.getElementById('modal-future-title').textContent = id ? 'Edit Idea' : 'New Idea';
-  document.getElementById('modal-future').classList.add('open');
-}
-
-function openAddYarn() {
-  ['y-name','y-brand','y-colour','y-qty','y-metres','y-fibre','y-notes'].forEach(f => { document.getElementById(f).value = ''; });
-  document.getElementById('y-swatch').value = '#1B6B6B';
-  document.getElementById('y-weight').value = 'DK';
-  document.getElementById('y-avail').value = 'available';
-  document.getElementById('y-photo-preview').style.display = 'none';
-  yarnPhotoDataUrl = null;
-  document.getElementById('modal-yarn').classList.add('open');
-}
-
-// ─── File handlers ─────────────────────────────────────────
-function handlePhotoUpload(input, previewId) {
-  const file = input.files[0]; if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    const prev = document.getElementById(previewId);
-    prev.src = e.target.result; prev.style.display = 'block';
-    if (previewId === 'p-photo-preview') photoDataUrl = e.target.result;
-    if (previewId === 'f-photo-preview') futurePhotoDataUrl = e.target.result;
-    if (previewId === 'y-photo-preview') yarnPhotoDataUrl = e.target.result;
-  };
-  reader.readAsDataURL(file);
-}
-
-function handlePdfUpload(input) {
-  const file = input.files[0]; if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    pdfDataUrl = e.target.result;
-    const span = document.getElementById('pdf-name');
-    span.textContent = file.name; span.style.display = 'block';
-  };
-  reader.readAsDataURL(file);
-}
-
-// ─── Save ─────────────────────────────────────────────────
-function saveProject() {
-  const name = document.getElementById('p-name').value.trim();
-  if (!name) { alert('Please enter a project name.'); return; }
-  const existing = editingId ? projects.find(x => x.id === editingId) : null;
-  const p = {
-    id: editingId || Date.now().toString(),
-    name,
-    status: document.getElementById('p-status').value,
-    craft: document.getElementById('p-craft').value,
-    hook: document.getElementById('p-hook').value,
-    fibre: document.getElementById('p-fibre').value,
-    weight: document.getElementById('p-weight').value,
-    yarn: document.getElementById('p-yarn').value,
-    patternLink: document.getElementById('p-pattern-link').value,
-    startDate: document.getElementById('p-start').value,
-    goalDate: document.getElementById('p-goal').value,
-    endDate: document.getElementById('p-end').value,
-    progress: parseInt(document.getElementById('p-progress').value) || 0,
-    totalRows: parseInt(document.getElementById('p-total-rows').value) || 0,
-    currentRow: existing ? (existing.currentRow || 0) : 0,
-    notes: document.getElementById('p-notes').value,
-    noteLog: existing ? (existing.noteLog || []) : [],
-    photo: photoDataUrl, pdf: pdfDataUrl,
-    pdfName: pdfDataUrl ? document.getElementById('pdf-name').textContent : null
-  };
-  if (editingId) { projects = projects.map(x => x.id === editingId ? p : x); }
-  else { projects.unshift(p); }
-  save(); closeModal('modal-project'); renderProjects();
-}
-
-function saveFuture() {
-  const name = document.getElementById('f-name').value.trim();
-  if (!name) { alert('Please enter a name.'); return; }
-  const f = {
-    id: editingId || Date.now().toString(),
-    name, craft: document.getElementById('f-craft').value,
-    inspo: document.getElementById('f-inspo').value,
-    pattern: document.getElementById('f-pattern').value,
-    hook: document.getElementById('f-hook').value,
-    startDate: document.getElementById('f-start').value,
-    endDate: document.getElementById('f-end').value,
-    notes: document.getElementById('f-notes').value,
-    photo: futurePhotoDataUrl, linkedYarns: [...tempLinkedYarns]
-  };
-  if (editingId) { futures = futures.map(x => x.id === editingId ? f : x); }
-  else { futures.unshift(f); }
-  save(); closeModal('modal-future'); renderFutures();
-}
-
-function saveYarn() {
-  const name = document.getElementById('y-name').value.trim();
-  if (!name) { alert('Please enter a yarn name.'); return; }
-  const metres = parseInt(document.getElementById('y-metres').value) || 0;
-  const qty = parseInt(document.getElementById('y-qty').value) || 1;
-  yarns.unshift({
-    id: Date.now().toString(), name,
-    brand: document.getElementById('y-brand').value,
-    colour: document.getElementById('y-colour').value,
-    swatch: document.getElementById('y-swatch').value,
-    weight: document.getElementById('y-weight').value,
-    qty, metres, totalMetres: metres * qty, usedMetres: 0,
-    fibre: document.getElementById('y-fibre').value,
-    avail: document.getElementById('y-avail').value,
-    notes: document.getElementById('y-notes').value,
-    photo: yarnPhotoDataUrl
-  });
-  save(); closeModal('modal-yarn'); renderYarns();
-}
-
-// ─── Usage tracker ─────────────────────────────────────────
-function addUsage(yarnId) {
-  const inputEl = document.getElementById('use-input-' + yarnId);
-  const val = parseInt(inputEl.value);
-  if (!val || val <= 0) { inputEl.focus(); return; }
-  const y = yarns.find(x => x.id === yarnId); if (!y) return;
-  const total = y.totalMetres || (y.qty * y.metres);
-  y.usedMetres = Math.min(total, (y.usedMetres || 0) + val);
-  inputEl.value = '';
-  if (y.usedMetres >= total) y.avail = 'used';
-  save(); renderYarns();
-}
-
-function resetUsage(yarnId) {
-  const y = yarns.find(x => x.id === yarnId); if (!y) return;
-  if (!confirm('Reset usage tracker for this yarn?')) return;
-  y.usedMetres = 0;
-  if (y.avail === 'used') y.avail = 'available';
-  save(); renderYarns();
-}
-
-// ─── Linked yarns ──────────────────────────────────────────
-function populateYarnSelect() {
-  const sel = document.getElementById('f-yarn-select');
-  sel.innerHTML = '<option value="">— Select from stash —</option>';
-  yarns.filter(y => y.avail !== 'used').forEach(y => {
-    const opt = document.createElement('option');
-    opt.value = y.id;
-    opt.textContent = y.name + (y.colour ? ' — ' + y.colour : '');
-    sel.appendChild(opt);
-  });
-}
-
-function addLinkedYarn() {
-  const sel = document.getElementById('f-yarn-select');
-  const yId = sel.value; if (!yId || tempLinkedYarns.includes(yId)) return;
-  tempLinkedYarns.push(yId); renderLinkedYarns();
-}
-
-function removeLinkedYarn(yId) {
-  tempLinkedYarns = tempLinkedYarns.filter(x => x !== yId); renderLinkedYarns();
-}
-
-function renderLinkedYarns() {
-  const cont = document.getElementById('f-linked-yarns'); cont.innerHTML = '';
-  tempLinkedYarns.forEach(yId => {
-    const y = yarns.find(x => x.id === yId); if (!y) return;
-    const div = document.createElement('div'); div.className = 'linked-yarn';
-    div.innerHTML = `<div class="swatch" style="background:${y.swatch};"></div><span>${y.name}${y.colour?' — '+y.colour:''}</span><span style="margin-left:auto;cursor:pointer;color:var(--accent);" onclick="removeLinkedYarn('${yId}')">x</span>`;
-    cont.appendChild(div);
-  });
-}
-
-// ─── Row counter ──────────────────────────────────────────
-function changeRow(id, delta) {
-  const p = projects.find(x => x.id === id); if (!p) return;
-  p.currentRow = Math.max(0, (p.currentRow || 0) + delta);
-  if (p.totalRows) p.progress = Math.min(100, Math.round((p.currentRow / p.totalRows) * 100));
-  save(); renderProjects();
-}
-
-function addNoteToProject(id) {
-  const input = document.getElementById('note-input-' + id);
-  if (!input || !input.value.trim()) return;
-  const p = projects.find(x => x.id === id); if (!p) return;
-  if (!p.noteLog) p.noteLog = [];
-  p.noteLog.unshift({ text: input.value.trim(), date: new Date().toLocaleDateString('en-AU',{day:'numeric',month:'short',year:'numeric'}) });
-  input.value = ''; save(); renderProjects();
-}
-
-// ─── Delete ───────────────────────────────────────────────
-function deleteProject(id) { if (!confirm('Delete this project?')) return; projects = projects.filter(x => x.id !== id); save(); renderProjects(); }
-function deleteFuture(id)  { if (!confirm('Delete this idea?')) return;    futures  = futures.filter(x => x.id !== id);  save(); renderFutures(); }
-function deleteYarn(id)    { if (!confirm('Remove this yarn?')) return;     yarns    = yarns.filter(x => x.id !== id);    save(); renderYarns(); }
-
-// ─── Helpers ──────────────────────────────────────────────
-function fmtDate(d) {
-  if (!d) return '';
-  return new Date(d + 'T00:00:00').toLocaleDateString('en-AU',{day:'numeric',month:'short',year:'numeric'});
-}
-
-function daysLeft(d) {
-  if (!d) return null;
-  const today = new Date(); today.setHours(0,0,0,0);
-  return Math.ceil((new Date(d + 'T00:00:00') - today) / 86400000);
-}
-
-function promoteToProject(id) {
-  const f = futures.find(x => x.id === id); if (!f) return;
-  projects.unshift({
-    id: Date.now().toString(), name: f.name, status: 'active',
-    craft: f.craft, hook: f.hook, fibre: '', weight: '', yarn: '',
-    patternLink: f.pattern, startDate: new Date().toISOString().slice(0,10),
-    goalDate: f.endDate, notes: f.notes||f.inspo||'',
-    noteLog: [], photo: f.photo, progress: 0, currentRow: 0, totalRows: 0
-  });
-  futures = futures.filter(x => x.id !== id); save(); switchTab('current');
-}
-
-// ─── Render: current projects ──────────────────────────────
-function renderProjects() {
-  const grid = document.getElementById('current-projects-grid');
-  const statsEl = document.getElementById('stats-current');
-  if (!projects.length) {
-    grid.innerHTML = ''; grid.appendChild(document.getElementById('current-empty'));
-    document.getElementById('current-empty').style.display = 'block';
-    statsEl.style.display = 'none'; return;
-  }
-  statsEl.style.display = 'grid';
-  statsEl.innerHTML = `
-    <div class="stat-box"><div class="stat-num">${projects.length}</div><div class="stat-label">Total</div></div>
-    <div class="stat-box"><div class="stat-num">${projects.filter(p=>p.status==='active').length}</div><div class="stat-label">Active</div></div>
-    <div class="stat-box"><div class="stat-num">${projects.filter(p=>p.status==='complete').length}</div><div class="stat-label">Completed</div></div>
-  `;
-  grid.innerHTML = '';
-  projects.forEach(p => {
-    const dl = daysLeft(p.goalDate);
-    const dlStr = dl !== null ? (dl > 0 ? `${dl} days remaining` : dl === 0 ? 'Due today' : `${Math.abs(dl)} days overdue`) : '';
-    const fibreParts = [p.fibre, p.weight, p.yarn].filter(Boolean);
-    const fibreTags = fibreParts.map(t => `<span class="fibre-tag">${t}</span>`).join('');
-    const noteLogHTML = p.noteLog && p.noteLog.length ? p.noteLog.slice(0,3).map(n =>
-      `<div class="note-entry">${n.text}<div class="note-date">${n.date}</div></div>`).join('') : '';
-    const cardInner = `
-      ${p.photo
-        ? `<div class="card-photo" style="position:relative;"><img src="${p.photo}" alt="${p.name}"><span class="card-status status-${p.status}">${p.status}</span></div>`
-        : `<div class="card-photo-placeholder" style="position:relative;">${p.craft || 'Knitting'}<span class="card-status status-${p.status}" style="position:absolute;top:8px;right:8px;">${p.status}</span></div>`}
-      <div class="card-body">
-        <div class="card-title">${p.name}</div>
-        <div class="card-meta">
-          ${p.hook ? `<span>${p.hook}</span>` : ''}
-          ${p.craft ? `<span>${p.craft}</span>` : ''}
-          ${p.pdfName ? `<span class="pdf-indicator">PDF</span>` : ''}
-        </div>
-        ${fibreTags ? `<div style="margin:4px 0;">${fibreTags}</div>` : ''}
-        <div class="progress-wrap">
-          <div class="progress-label"><span>Progress</span><span>${p.progress||0}%${dlStr ? ' — ' + dlStr : ''}</span></div>
-          <div class="progress-bar"><div class="progress-fill" style="width:${p.progress||0}%"></div></div>
-        </div>
-        ${p.totalRows ? `
-        <div class="row-tracker">
-          <div class="row-tracker-label"><span>Row / Round Tracker</span><span>${p.currentRow||0} of ${p.totalRows}</span></div>
-          <div class="row-counter">
-            <button class="row-btn" onclick="event.stopPropagation();changeRow('${p.id}',-1)">-</button>
-            <span class="row-count">${p.currentRow||0}</span>
-            <button class="row-btn" onclick="event.stopPropagation();changeRow('${p.id}',1)">+</button>
-          </div>
-        </div>` : ''}
-        ${noteLogHTML ? `<div class="notes-log">${noteLogHTML}</div>` : ''}
-        <div class="quick-note" onclick="event.stopPropagation()">
-          <input type="text" id="note-input-${p.id}" placeholder="Record a journal entry…" onkeydown="if(event.key==='Enter')addNoteToProject('${p.id}')">
-          <button onclick="addNoteToProject('${p.id}')">Note</button>
-        </div>
-        <div class="card-dates">
-          ${p.startDate ? `<span>Started ${fmtDate(p.startDate)}</span>` : ''}
-          ${p.goalDate  ? `<span>Goal ${fmtDate(p.goalDate)}</span>` : ''}
-          ${p.endDate   ? `<span>Finished ${fmtDate(p.endDate)}</span>` : ''}
-        </div>
-        <div class="card-actions" onclick="event.stopPropagation()">
-          <button class="btn-small" onclick="openAddProject('${p.id}')">Edit</button>
-          ${p.pdf ? `<button class="btn-small" onclick="window.open('${p.pdf}')">PDF</button>` : ''}
-          <button class="btn-small danger" onclick="deleteProject('${p.id}')">Delete</button>
-        </div>
-      </div>`;
-    grid.innerHTML += makeFrame(cardInner);
-  });
-}
-
-// ─── Render: future ideas ──────────────────────────────────
-function renderFutures() {
-  const grid = document.getElementById('future-projects-grid');
-  if (!futures.length) {
-    grid.innerHTML = ''; grid.appendChild(document.getElementById('future-empty'));
-    document.getElementById('future-empty').style.display = 'block'; return;
-  }
-  grid.innerHTML = '';
-  futures.forEach(f => {
-    const linkedHTML = f.linkedYarns && f.linkedYarns.length ? f.linkedYarns.map(yId => {
-      const y = yarns.find(x => x.id === yId); if (!y) return '';
-      return `<div class="linked-yarn" onclick="event.stopPropagation();switchTab('stash')"><div class="swatch" style="background:${y.swatch};"></div><span>${y.name}${y.colour?' — '+y.colour:''}</span><span style="margin-left:auto;font-size:10px;opacity:0.7;">stash</span></div>`;
-    }).join('') : '';
-    const cardInner = `
-      ${f.photo ? `<div class="card-photo"><img src="${f.photo}" alt="${f.name}"></div>` : `<div class="card-photo-placeholder">${f.craft || 'Future Make'}</div>`}
-      <div class="card-body">
-        <div class="future-badge">Future Make</div>
-        <div class="card-title">${f.name}</div>
-        <div class="card-meta">
-          ${f.craft ? `<span>${f.craft}</span>` : ''}
-          ${f.hook  ? `<span>${f.hook}</span>` : ''}
-          ${f.pattern ? `<span>Pattern noted</span>` : ''}
-        </div>
-        ${f.inspo ? `<div style="font-size:11px;color:var(--ink-faded);font-style:italic;margin-top:6px;font-family:'Playfair Display',serif;line-height:1.5;">${f.inspo}</div>` : ''}
-        ${linkedHTML ? `<div style="margin-top:8px;">${linkedHTML}</div>` : ''}
-        ${(f.startDate||f.endDate) ? `<div class="card-dates">
-          ${f.startDate?`<span>From ${fmtDate(f.startDate)}</span>`:''}
-          ${f.endDate?`<span>By ${fmtDate(f.endDate)}</span>`:''}
-        </div>` : ''}
-        <div class="card-actions" onclick="event.stopPropagation()">
-          <button class="btn-small" onclick="openAddFuture('${f.id}')">Edit</button>
-          ${f.pattern && f.pattern.startsWith('http') ? `<button class="btn-small" onclick="window.open('${f.pattern}')">Pattern</button>` : ''}
-          <button class="btn-small" onclick="event.stopPropagation();promoteToProject('${f.id}')">Begin</button>
-          <button class="btn-small danger" onclick="deleteFuture('${f.id}')">Delete</button>
-        </div>
-      </div>`;
-    grid.innerHTML += makeFrame(cardInner);
-  });
-}
-
-// ─── Render: yarn stash ────────────────────────────────────
-function renderYarns() {
-  const grid = document.getElementById('yarn-grid');
-  const statsEl = document.getElementById('stash-stats');
-  if (!yarns.length) {
-    grid.innerHTML = ''; grid.appendChild(document.getElementById('stash-empty'));
-    document.getElementById('stash-empty').style.display = 'block';
-    statsEl.style.display = 'none'; return;
-  }
-  const totalMetres = yarns.reduce((s,y) => s + (y.totalMetres || y.qty*(y.metres||0)), 0);
-  const usedMetres  = yarns.reduce((s,y) => s + (y.usedMetres||0), 0);
-  statsEl.style.display = 'grid';
-  statsEl.innerHTML = `
-    <div class="stat-box"><div class="stat-num">${yarns.length}</div><div class="stat-label">Yarn Types</div></div>
-    <div class="stat-box"><div class="stat-num">${yarns.reduce((s,y)=>s+(y.qty||1),0)}</div><div class="stat-label">Skeins / Balls</div></div>
-    <div class="stat-box"><div class="stat-num">${totalMetres.toLocaleString()}</div><div class="stat-label">Total Metres</div></div>
-    <div class="stat-box"><div class="stat-num">${usedMetres.toLocaleString()}</div><div class="stat-label">Used</div></div>
-    <div class="stat-box"><div class="stat-num">${(totalMetres-usedMetres).toLocaleString()}</div><div class="stat-label">Remaining</div></div>
-  `;
-  grid.innerHTML = '';
-  yarns.forEach(y => {
-    const total = y.totalMetres || (y.qty*(y.metres||0));
-    const used  = y.usedMetres || 0;
-    const remaining = Math.max(0, total - used);
-    const pct = total > 0 ? Math.min(100, Math.round((used/total)*100)) : 0;
-    const cardInner = `
-      ${y.photo ? `<div style="width:100%;height:110px;overflow:hidden;margin-bottom:10px;"><img src="${y.photo}" alt="${y.name}" style="width:100%;height:100%;object-fit:cover;filter:sepia(8%);"></div>` : ''}
-      <div class="yarn-swatch" style="background:${y.swatch};${y.photo?'height:30px;':''}"></div>
-      <div class="yarn-name">${y.name}</div>
-      <div class="yarn-detail">
-        ${y.brand  ? `<div>${y.brand}</div>` : ''}
-        ${y.colour ? `<div>${y.colour}</div>` : ''}
-        ${y.fibre  ? `<div>${y.fibre}</div>` : ''}
-        ${y.qty    ? `<div>${y.qty} skein${y.qty>1?'s':''}${y.metres?` · ${y.metres}m each`:''}${total?` · ${total}m total`:''}</div>` : ''}
-        <div>${y.avail==='available'?'Available':y.avail==='allocated'?'Allocated':'Used up'}</div>
+  el.innerHTML = state.blocks.map(b => {
+    const totalExercises = Object.values(b.weeks).reduce((acc, days) => acc + Object.values(days).reduce((a, ex) => a + ex.length, 0), 0);
+    const totalDone = Object.values(b.progress || {}).reduce((acc, d) => acc + Object.values(d).filter(Boolean).length, 0);
+    const weeksLoaded = Object.keys(b.weeks).length;
+    return `<div class="block-item" onclick="openBlock('${b.id}')">
+      <div>
+        <div class="bi-name">${b.name}</div>
+        <div class="bi-meta">${weeksLoaded}/12 weeks loaded · ${totalDone} exercises completed</div>
       </div>
-      ${y.weight ? `<span class="yarn-weight-badge">${y.weight}</span>` : ''}
-      ${y.notes ? `<div style="font-size:11px;color:var(--ink-faded);font-style:italic;font-family:'Playfair Display',serif;margin-top:6px;line-height:1.5;">${y.notes}</div>` : ''}
-      ${total > 0 ? `
-      <div class="usage-tracker">
-        <div class="usage-label"><span>Metres Used</span><span>${used}m / ${total}m (${pct}%)</span></div>
-        <div class="usage-bar"><div class="usage-fill" style="width:${pct}%"></div></div>
-        <div style="font-size:10px;color:var(--ink-faded);font-style:italic;font-family:'Playfair Display',serif;margin-bottom:6px;">${remaining}m remaining</div>
-        <div class="usage-controls" onclick="event.stopPropagation()">
-          <div class="usage-input-wrap">
-            <input type="number" id="use-input-${y.id}" placeholder="metres" min="1" onkeydown="if(event.key==='Enter')addUsage('${y.id}')">
-            <span class="usage-unit">m</span>
-          </div>
-          <button class="btn-use" onclick="addUsage('${y.id}')">Use</button>
-          ${used > 0 ? `<button class="btn-small" onclick="resetUsage('${y.id}')">Reset</button>` : ''}
-        </div>
-      </div>` : ''}
-      <div class="card-actions" style="margin-top:10px;">
-        <button class="btn-small danger" onclick="deleteYarn('${y.id}')">Remove</button>
+      <div class="block-item-actions" onclick="event.stopPropagation()">
+        <button class="btn btn-secondary" onclick="openBlock('${b.id}')">Open</button>
+        <button class="btn btn-danger" onclick="deleteBlock('${b.id}')">Delete</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── RENDER PROGRAM ─────────────────────────────────────────
+function renderProgram() {
+  const block = state.blocks.find(b => b.id === state.activeBlock);
+  if (!block) return;
+  const el = document.getElementById('program-content');
+
+  // Build week grid
+  let weekCards = '';
+  for (let w = 1; w <= 12; w++) {
+    const loaded = !!block.weeks[w];
+    const prog = getWeekProgress(block, w);
+    const pct = prog.total ? Math.round(prog.done / prog.total * 100) : 0;
+    weekCards += `<div class="week-card ${state.activeWeek === w ? 'active' : ''}" onclick="selectWeek(${w})">
+      <div class="wnum">${w}</div>
+      <div class="wpct">${loaded ? pct + '%' : '—'}</div>
+      <div class="wbar"><div class="wbar-fill" style="width:${pct}%"></div></div>
+    </div>`;
+  }
+
+  const week = block.weeks[state.activeWeek];
+  let dayTabsHtml = '';
+  let dayContentHtml = '';
+
+  if (week) {
+    // Day tabs
+    dayTabsHtml = DAYS.map(d => {
+      const dayData = week[d];
+      if (!dayData) return '';
+      const prog = getDayProgress(block, state.activeWeek, d);
+      const done = prog.total > 0 && prog.done === prog.total;
+      return `<div class="day-tab ${state.activeDay === d ? 'active' : ''} ${done ? 'done' : ''}" onclick="selectDay('${d}')">
+        ${d.charAt(0).toUpperCase() + d.slice(1,3)}
+        <span class="day-dot"></span>
       </div>`;
-    grid.innerHTML += makeFrame(cardInner);
+    }).join('');
+
+    // Day content
+    const dayData = week[state.activeDay];
+    if (dayData) {
+      if (dayData.length === 1 && dayData[0].name.toUpperCase().includes('REST')) {
+        dayContentHtml = `<div class="rest-day"><div class="rest-icon">😴</div><h2>Rest Day</h2><p style="color:var(--text-muted);font-family:'Barlow Condensed',sans-serif;letter-spacing:0.05em;margin-top:8px">Recovery is part of training.</p></div>`;
+      } else {
+        const prog = getDayProgress(block, state.activeWeek, state.activeDay);
+        const pct = prog.total ? Math.round(prog.done / prog.total * 100) : 0;
+        dayContentHtml = `
+          <div class="progress-bar-wrap">
+            <div class="progress-label"><span>Day Progress</span><span>${prog.done}/${prog.total} exercises</span></div>
+            <div class="progress-track"><div class="progress-fill" id="day-progress-fill" style="width:${pct}%"></div></div>
+          </div>
+          ${dayData.map((ex, i) => renderExercise(block, state.activeWeek, state.activeDay, ex, i, dayData.length)).join('')}
+          <button class="btn-add-exercise" onclick="addExercise(${state.activeWeek},'${state.activeDay}')">+ Add Exercise</button>`;
+      }
+    } else {
+      dayContentHtml = `<div class="rest-day"><div class="rest-icon">😴</div><h2>Rest Day</h2></div>`;
+    }
+  } else {
+    dayContentHtml = `<div class="empty-state"><div class="es-icon">📋</div><h3>Week ${state.activeWeek} Not Loaded</h3><p>Go to <strong>Import Week</strong> to load this week's workout.</p></div>`;
+  }
+
+  el.innerHTML = `
+    <div class="block-header">
+      <div>
+        <div class="block-title">${block.name}</div>
+        <div class="day-meta">12-Week Block</div>
+      </div>
+      <span class="block-badge">Week ${state.activeWeek}</span>
+    </div>
+    <div class="week-grid">${weekCards}</div>
+    <div class="day-tabs">${dayTabsHtml}</div>
+    <div class="day-header">
+      <div class="day-title">${state.activeDay.charAt(0).toUpperCase() + state.activeDay.slice(1)}</div>
+    </div>
+    ${dayContentHtml}
+  `;
+}
+
+function renderExercise(block, week, day, ex, idx, total) {
+  const key = `${week}-${day}-${idx}`;
+  const checked = (block.progress || {})[key] || false;
+  const comment = ((block.comments || {})[key]) || '';
+  const detailFormatted = formatDetail(ex.detail);
+  const canMoveUp = idx > 0;
+  const canMoveDown = idx < total - 1;
+  return `<div class="exercise-block ${checked ? 'completed' : ''}" id="exblock-${key}">
+    <div class="ex-header">
+      <div class="ex-check ${checked ? 'checked' : ''}" onclick="toggleExercise('${key}')"></div>
+      <div class="ex-name" id="exname-${key}" onclick="startEditName('${key}')" title="Click to edit">${ex.name}</div>
+      <div class="ex-edit-controls">
+        <button class="ex-ctrl-btn" onclick="moveExercise('${week}','${day}',${idx},-1)" ${canMoveUp ? '' : 'disabled'} title="Move up">↑</button>
+        <button class="ex-ctrl-btn" onclick="moveExercise('${week}','${day}',${idx},1)" ${canMoveDown ? '' : 'disabled'} title="Move down">↓</button>
+        <button class="ex-ctrl-btn ex-ctrl-del" onclick="deleteExercise('${week}','${day}',${idx})" title="Delete exercise">✕</button>
+      </div>
+      <div class="ex-expand" id="expand-${key}" onclick="toggleExpand('${key}')">▾</div>
+    </div>
+    <div class="ex-body" id="body-${key}">
+      <div class="ex-detail-wrap">
+        <div class="comment-label" style="margin-bottom:4px">Instructions / Detail <span class="edit-hint">— click to edit</span></div>
+        <div class="ex-detail" id="exdetail-view-${key}" onclick="startEditDetail('${key}')" title="Click to edit">${detailFormatted || '<span style="color:var(--text-dim);font-style:italic">No detail — click to add...</span>'}</div>
+        <textarea class="ex-detail-edit" id="exdetail-edit-${key}" style="display:none" onblur="saveDetail('${key}',this.value)" onkeydown="if(event.key==='Escape')cancelEditDetail('${key}')">${ex.detail || ''}</textarea>
+      </div>
+      <div class="ex-comment">
+        <div class="comment-label">Notes / Weight / Time</div>
+        <textarea placeholder="Add your notes, weight used, time, etc..." onchange="saveComment('${key}', this.value)">${comment}</textarea>
+      </div>
+    </div>
+  </div>`;
+}
+
+function startEditName(key) {
+  const nameEl = document.getElementById('exname-' + key);
+  const current = nameEl.textContent.trim();
+  nameEl.innerHTML = `<input class="ex-name-input" id="exname-input-${key}" value="${current.replace(/"/g,'&quot;')}" onblur="saveEditName('${key}',this.value)" onkeydown="if(event.key==='Enter'||event.key==='Escape')this.blur()" onclick="event.stopPropagation()">`;
+  const inp = document.getElementById('exname-input-' + key);
+  inp.focus(); inp.select();
+}
+
+function saveEditName(key, val) {
+  const [week, day, idx] = parseKey(key);
+  const block = state.blocks.find(b => b.id === state.activeBlock);
+  const ex = block.weeks[week][day][idx];
+  ex.name = val.trim() || ex.name;
+  save();
+  const nameEl = document.getElementById('exname-' + key);
+  if (nameEl) { nameEl.textContent = ex.name; nameEl.onclick = () => startEditName(key); }
+}
+
+function startEditDetail(key) {
+  const view = document.getElementById('exdetail-view-' + key);
+  const edit = document.getElementById('exdetail-edit-' + key);
+  if (!view || !edit) return;
+  view.style.display = 'none';
+  edit.style.display = 'block';
+  edit.focus();
+  // Auto-size
+  edit.style.height = 'auto';
+  edit.style.height = Math.max(80, edit.scrollHeight) + 'px';
+}
+
+function cancelEditDetail(key) {
+  const [week, day, idx] = parseKey(key);
+  const block = state.blocks.find(b => b.id === state.activeBlock);
+  const ex = block.weeks[week][day][idx];
+  const view = document.getElementById('exdetail-view-' + key);
+  const edit = document.getElementById('exdetail-edit-' + key);
+  edit.value = ex.detail || '';
+  edit.style.display = 'none';
+  view.style.display = '';
+}
+
+function saveDetail(key, val) {
+  const [week, day, idx] = parseKey(key);
+  const block = state.blocks.find(b => b.id === state.activeBlock);
+  const ex = block.weeks[week][day][idx];
+  ex.detail = val.trim();
+  save();
+  const view = document.getElementById('exdetail-view-' + key);
+  const edit = document.getElementById('exdetail-edit-' + key);
+  if (view) {
+    view.innerHTML = formatDetail(ex.detail) || '<span style="color:var(--text-dim);font-style:italic">No detail — click to add...</span>';
+    view.style.display = '';
+  }
+  if (edit) edit.style.display = 'none';
+}
+
+function deleteExercise(week, day, idx) {
+  if (!confirm('Remove this exercise?')) return;
+  const block = state.blocks.find(b => b.id === state.activeBlock);
+  block.weeks[week][day].splice(idx, 1);
+  // Shift progress/comment keys down
+  const progress = block.progress || {};
+  const comments = block.comments || {};
+  const total = block.weeks[week][day].length + 1; // was +1 before deletion
+  for (let i = idx; i < total; i++) {
+    const oldKey = `${week}-${day}-${i+1}`;
+    const newKey = `${week}-${day}-${i}`;
+    if (progress[oldKey] !== undefined) { progress[newKey] = progress[oldKey]; delete progress[oldKey]; }
+    if (comments[oldKey] !== undefined) { comments[newKey] = comments[oldKey]; delete comments[oldKey]; }
+  }
+  // Clean up deleted index leftovers
+  delete progress[`${week}-${day}-${total-1}`];
+  delete comments[`${week}-${day}-${total-1}`];
+  save();
+  renderProgram();
+}
+
+function moveExercise(week, day, idx, dir) {
+  const block = state.blocks.find(b => b.id === state.activeBlock);
+  const arr = block.weeks[week][day];
+  const newIdx = idx + dir;
+  if (newIdx < 0 || newIdx >= arr.length) return;
+  // Swap exercises
+  [arr[idx], arr[newIdx]] = [arr[newIdx], arr[idx]];
+  // Swap progress/comment keys
+  const progress = block.progress || {};
+  const comments = block.comments || {};
+  const keyA = `${week}-${day}-${idx}`;
+  const keyB = `${week}-${day}-${newIdx}`;
+  [progress[keyA], progress[keyB]] = [progress[keyB], progress[keyA]];
+  [comments[keyA], comments[keyB]] = [comments[keyB], comments[keyA]];
+  // Clean undefined
+  if (!progress[keyA]) delete progress[keyA];
+  if (!progress[keyB]) delete progress[keyB];
+  if (!comments[keyA]) delete comments[keyA];
+  if (!comments[keyB]) delete comments[keyB];
+  save();
+  renderProgram();
+  // Re-open the moved card
+  const newKey = `${week}-${day}-${newIdx}`;
+  setTimeout(() => { 
+    const body = document.getElementById('body-' + newKey);
+    const icon = document.getElementById('expand-' + newKey);
+    if (body) { body.classList.add('open'); icon && icon.classList.add('open'); }
+  }, 10);
+}
+
+function addExercise(week, day) {
+  const block = state.blocks.find(b => b.id === state.activeBlock);
+  if (!block.weeks[week]) block.weeks[week] = {};
+  if (!block.weeks[week][day]) block.weeks[week][day] = [];
+  block.weeks[week][day].push({ name: 'New Exercise', detail: '' });
+  save();
+  renderProgram();
+  // Auto-open the new card for editing
+  const newIdx = block.weeks[week][day].length - 1;
+  const newKey = `${week}-${day}-${newIdx}`;
+  setTimeout(() => {
+    const body = document.getElementById('body-' + newKey);
+    const icon = document.getElementById('expand-' + newKey);
+    if (body) { body.classList.add('open'); icon && icon.classList.add('open'); }
+    startEditName(newKey);
+  }, 20);
+}
+
+function parseKey(key) {
+  const parts = key.split('-');
+  // key format: week-day-idx  (day may be multi-part but we join from index 1 to length-1)
+  const week = parseInt(parts[0]);
+  const idx = parseInt(parts[parts.length - 1]);
+  const day = parts.slice(1, parts.length - 1).join('-');
+  return [week, day, idx];
+}
+
+function formatDetail(detail) {
+  if (!detail) return '';
+  return detail.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener">▶ Watch Demo</a>');
+}
+
+function toggleExpand(key) {
+  const body = document.getElementById('body-' + key);
+  const icon = document.getElementById('expand-' + key);
+  body.classList.toggle('open');
+  icon.classList.toggle('open');
+}
+
+function toggleExercise(key) {
+  const block = state.blocks.find(b => b.id === state.activeBlock);
+  if (!block.progress) block.progress = {};
+  block.progress[key] = !block.progress[key];
+  save();
+  // Update DOM without full re-render
+  const el = document.getElementById('exblock-' + key);
+  const check = el.querySelector('.ex-check');
+  if (block.progress[key]) { el.classList.add('completed'); check.classList.add('checked'); }
+  else { el.classList.remove('completed'); check.classList.remove('checked'); }
+  // Update progress bar
+  updateDayProgressBar(block);
+}
+
+function saveComment(key, val) {
+  const block = state.blocks.find(b => b.id === state.activeBlock);
+  if (!block.comments) block.comments = {};
+  block.comments[key] = val;
+  save();
+}
+
+function updateDayProgressBar(block) {
+  const prog = getDayProgress(block, state.activeWeek, state.activeDay);
+  const pct = prog.total ? Math.round(prog.done / prog.total * 100) : 0;
+  const fill = document.getElementById('day-progress-fill');
+  if (fill) fill.style.width = pct + '%';
+  // Update week card
+  const weekCards = document.querySelectorAll('.week-card');
+  const w = state.activeWeek - 1;
+  if (weekCards[w]) {
+    const wp = getWeekProgress(block, state.activeWeek);
+    const wpct = wp.total ? Math.round(wp.done / wp.total * 100) : 0;
+    weekCards[w].querySelector('.wpct').textContent = wpct + '%';
+    weekCards[w].querySelector('.wbar-fill').style.width = wpct + '%';
+  }
+}
+
+function getWeekProgress(block, week) {
+  const days = block.weeks[week];
+  if (!days) return { done: 0, total: 0 };
+  let done = 0, total = 0;
+  DAYS.forEach(d => {
+    const exs = days[d] || [];
+    exs.forEach((_, i) => {
+      const key = `${week}-${d}-${i}`;
+      total++;
+      if ((block.progress || {})[key]) done++;
+    });
   });
+  return { done, total };
 }
 
-// ═══════════════════════════════════
-// BACKUP / RESTORE
-// ═══════════════════════════════════
-function buildExportData(which) {
-  const data = { exportDate: new Date().toISOString(), version: '1.0', app: 'bearlyteals' };
-  if (!which || which === 'all' || which === 'projects') data.projects = projects;
-  if (!which || which === 'all' || which === 'futures')  data.futures  = futures;
-  if (!which || which === 'all' || which === 'yarns')    data.yarns    = yarns;
-  return data;
+function getDayProgress(block, week, day) {
+  const days = (block.weeks[week] || {});
+  const exs = days[day] || [];
+  let done = 0;
+  exs.forEach((_, i) => {
+    if ((block.progress || {})[`${week}-${day}-${i}`]) done++;
+  });
+  return { done, total: exs.length };
 }
 
-function downloadJSON(data, filename) {
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = filename; a.click();
-  URL.revokeObjectURL(url);
+function selectWeek(w) {
+  state.activeWeek = w;
+  state.activeDay = 'monday';
+  save();
+  renderProgram();
 }
 
-function exportAll() {
-  const d = new Date();
-  const stamp = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  downloadJSON(buildExportData('all'), `bearlyteals-backup-${stamp}.json`);
-  document.getElementById('export-status').textContent = 'Backup downloaded — ' + new Date().toLocaleString('en-AU');
+function selectDay(d) {
+  state.activeDay = d;
+  save();
+  renderProgram();
 }
 
-function exportProjects() {
-  downloadJSON(buildExportData('projects'), 'bearlyteals-projects.json');
-  document.getElementById('export-status').textContent = 'Projects exported — ' + new Date().toLocaleString('en-AU');
+// ── IMPORT ─────────────────────────────────────────────────
+function renderImportBlockSelect() {
+  const opts = '<option value="">— Select block —</option>' + state.blocks.map(b => `<option value="${b.id}">${b.name}</option>`).join('');
+  document.getElementById('import-block-select').innerHTML = opts;
+  document.getElementById('copy-source-block').innerHTML = opts;
+  if (state.activeBlock) {
+    document.getElementById('import-block-select').value = state.activeBlock;
+    document.getElementById('copy-source-block').value = state.activeBlock;
+    onCopyBlockChange();
+  }
 }
 
-function exportYarn() {
-  downloadJSON(buildExportData('yarns'), 'bearlyteals-yarn.json');
-  document.getElementById('export-status').textContent = 'Yarn stash exported — ' + new Date().toLocaleString('en-AU');
+// ── IMPORT MODE TOGGLE ─────────────────────────────────────
+function switchImportMode(mode) {
+  document.getElementById('import-mode-import').style.display = mode === 'import' ? '' : 'none';
+  document.getElementById('import-mode-copy').style.display   = mode === 'copy'   ? '' : 'none';
+  document.getElementById('mode-btn-import').classList.toggle('active', mode === 'import');
+  document.getElementById('mode-btn-copy').classList.toggle('active',   mode === 'copy');
+  document.getElementById('import-alert').innerHTML = '';
 }
 
-function handleImport(input) {
-  const file = input.files[0]; if (!file) return;
+// ── COPY WEEK ──────────────────────────────────────────────
+function onCopyBlockChange() {
+  const blockId = document.getElementById('copy-source-block').value;
+  const wSel = document.getElementById('copy-source-week');
+  const preview = document.getElementById('copy-preview');
+  wSel.innerHTML = '<option value="">— Select week —</option>';
+  preview.style.display = 'none';
+  if (!blockId) return;
+  const block = state.blocks.find(b => b.id === blockId);
+  const loaded = Object.keys(block.weeks || {}).map(Number).sort((a,b) => a-b);
+  loaded.forEach(w => {
+    const opt = document.createElement('option');
+    opt.value = w; opt.textContent = `Week ${w}`;
+    wSel.appendChild(opt);
+  });
+  wSel.onchange = () => renderCopyPreview(blockId, parseInt(wSel.value));
+}
+
+function renderCopyPreview(blockId, weekNum) {
+  const preview = document.getElementById('copy-preview');
+  const daysEl  = document.getElementById('copy-preview-days');
+  if (!blockId || !weekNum) { preview.style.display = 'none'; return; }
+  const block = state.blocks.find(b => b.id === blockId);
+  const week  = (block.weeks || {})[weekNum];
+  if (!week) { preview.style.display = 'none'; return; }
+  daysEl.innerHTML = DAYS.map(d => {
+    const exs = week[d];
+    if (!exs || !exs.length) return '';
+    const isRest = exs.length === 1 && exs[0].name.toUpperCase().includes('REST');
+    return `<div class="copy-day-chip">
+      <div class="chip-day">${d.slice(0,3)}</div>
+      <div class="chip-count">${isRest ? 'Rest' : exs.length + ' exercise' + (exs.length !== 1 ? 's' : '')}</div>
+    </div>`;
+  }).join('');
+  preview.style.display = 'block';
+}
+
+function copyWeek() {
+  const srcBlockId  = document.getElementById('copy-source-block').value;
+  const srcWeekNum  = parseInt(document.getElementById('copy-source-week').value);
+  const destBlockId = document.getElementById('import-block-select').value;
+  const destWeekNum = parseInt(document.getElementById('import-week').value);
+  const inclProgress = document.getElementById('copy-include-progress').checked;
+  const inclNotes    = document.getElementById('copy-include-notes').checked;
+
+  if (!srcBlockId)           return showAlert('error', 'Please select a source block.');
+  if (!srcWeekNum)           return showAlert('error', 'Please select a week to copy.');
+  if (!destBlockId)          return showAlert('error', 'Please select a destination block.');
+  if (!destWeekNum || destWeekNum < 1 || destWeekNum > 12)
+                             return showAlert('error', 'Destination week must be 1–12.');
+
+  const srcBlock  = state.blocks.find(b => b.id === srcBlockId);
+  const destBlock = state.blocks.find(b => b.id === destBlockId);
+  const srcWeek   = (srcBlock.weeks || {})[srcWeekNum];
+
+  if (!srcWeek) return showAlert('error', 'Source week has no data.');
+
+  // Warn if overwriting
+  if ((destBlock.weeks || {})[destWeekNum]) {
+    if (!confirm(`Week ${destWeekNum} in "${destBlock.name}" already has data. Overwrite it?`)) return;
+  }
+
+  // Deep copy exercises (no references)
+  if (!destBlock.weeks) destBlock.weeks = {};
+  destBlock.weeks[destWeekNum] = JSON.parse(JSON.stringify(srcWeek));
+
+  // Optionally copy progress
+  if (inclProgress) {
+    if (!destBlock.progress) destBlock.progress = {};
+    DAYS.forEach(day => {
+      const exs = srcWeek[day] || [];
+      exs.forEach((_, i) => {
+        const srcKey  = `${srcWeekNum}-${day}-${i}`;
+        const destKey = `${destWeekNum}-${day}-${i}`;
+        if ((srcBlock.progress || {})[srcKey]) destBlock.progress[destKey] = true;
+      });
+    });
+  }
+
+  // Optionally copy notes/comments
+  if (inclNotes) {
+    if (!destBlock.comments) destBlock.comments = {};
+    DAYS.forEach(day => {
+      const exs = srcWeek[day] || [];
+      exs.forEach((_, i) => {
+        const srcKey  = `${srcWeekNum}-${day}-${i}`;
+        const destKey = `${destWeekNum}-${day}-${i}`;
+        const note = (srcBlock.comments || {})[srcKey];
+        if (note) destBlock.comments[destKey] = note;
+      });
+    });
+  }
+
+  save();
+  const totalEx = Object.values(srcWeek).reduce((a, exs) => a + exs.length, 0);
+  showAlert('success', `✓ Week ${srcWeekNum} from "${srcBlock.name}" copied to Week ${destWeekNum} of "${destBlock.name}" — ${totalEx} exercises.`);
+}
+
+
+function importWorkout() {
+  const text = document.getElementById('paste-input').value.trim();
+  const blockId = document.getElementById('import-block-select').value;
+  const week = parseInt(document.getElementById('import-week').value);
+
+  if (!text) return showAlert('error', 'Please paste your workout text first.');
+  if (!blockId) return showAlert('error', 'Please select a block first.');
+  if (!week || week < 1 || week > 12) return showAlert('error', 'Week must be between 1 and 12.');
+
+  const parsed = parseWorkout(text);
+  if (!parsed || Object.keys(parsed).length === 0) return showAlert('error', 'Could not parse workout. Make sure it contains day names like Monday, Tuesday, etc.');
+
+  const block = state.blocks.find(b => b.id === blockId);
+  if (!block.weeks) block.weeks = {};
+  block.weeks[week] = parsed;
+  save();
+
+  showAlert('success', `✓ Week ${week} imported into "${block.name}" — ${Object.keys(parsed).length} days loaded.`);
+  document.getElementById('paste-input').value = '';
+}
+
+function clearImport() {
+  document.getElementById('paste-input').value = '';
+  document.getElementById('import-alert').innerHTML = '';
+}
+
+function showAlert(type, msg) {
+  const el = document.getElementById('import-alert');
+  el.innerHTML = `<div class="alert alert-${type}">${msg}</div>`;
+  setTimeout(() => { if (el.innerHTML.includes(msg)) el.innerHTML = ''; }, 5000);
+}
+
+function parseWorkout(text) {
+  const result = {};
+  const dayNames = { monday:1, tuesday:1, wednesday:1, thursday:1, friday:1, saturday:1, sunday:1 };
+  const lines = text.split('\n').map(l => l.trim()).filter(l => l);
+
+  let currentDay = null;
+  let currentEx = null;
+  let detailLines = [];
+
+  function flushEx() {
+    if (currentDay && currentEx) {
+      if (!result[currentDay]) result[currentDay] = [];
+      result[currentDay].push({ name: currentEx, detail: detailLines.join('\n').trim() });
+    }
+    currentEx = null;
+    detailLines = [];
+  }
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const lower = line.toLowerCase().replace(/[^a-z]/g,'');
+
+    // Check if it's a day header
+    if (dayNames[lower]) {
+      flushEx();
+      currentDay = lower;
+      continue;
+    }
+
+    // Skip separator lines
+    if (/^[-–—=*#]+$/.test(line)) continue;
+
+    // Check if it's an exercise line (starts with •, -, *, [ ], checkbox, or similar)
+    const isExLine = /^(\[[ x]?\]|[•\-\*]|\d+\.)/.test(line);
+
+    if (isExLine && currentDay) {
+      flushEx();
+      // Clean up the exercise title
+      let name = line
+        .replace(/^\[[ x]?\]\s*/, '')
+        .replace(/^[•\-\*]\s*/, '')
+        .replace(/^\d+\.\s*/, '')
+        .split(/\s{3,}/)[0]  // Take first part if lots of spaces
+        .trim();
+
+      // If the line has lots of content, split into name + detail
+      const shortMatch = name.match(/^([^0-9]{3,60}?)(\s+\d+\s+.*)$/);
+      if (name.length > 60) {
+        // Try to find a natural split point
+        const firstSentence = name.split(/\s(?=\d+\s*(min|sec|sets|reps|rounds|EMOM|x\s))/i);
+        currentEx = firstSentence[0].trim();
+        detailLines = [firstSentence.slice(1).join(' ')];
+      } else {
+        currentEx = name;
+      }
+      continue;
+    }
+
+    // Otherwise it's a detail line
+    if (currentDay && currentEx && line) {
+      detailLines.push(line);
+    }
+  }
+  flushEx();
+
+  // Post-process: if a day only has "REST", keep it
+  Object.keys(result).forEach(d => {
+    if (result[d].length === 0) delete result[d];
+  });
+
+  return result;
+}
+
+// ── FILE DROP ──────────────────────────────────────────────
+const fileDrop = document.getElementById('file-drop');
+const fileInput = document.getElementById('file-input');
+
+fileDrop.addEventListener('dragover', e => { e.preventDefault(); fileDrop.classList.add('drag-over'); });
+fileDrop.addEventListener('dragleave', () => fileDrop.classList.remove('drag-over'));
+fileDrop.addEventListener('drop', e => {
+  e.preventDefault(); fileDrop.classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file) readFile(file);
+});
+fileInput.addEventListener('change', e => { if (e.target.files[0]) readFile(e.target.files[0]); });
+
+function readFile(file) {
   const reader = new FileReader();
   reader.onload = e => {
-    try {
-      pendingImportData = JSON.parse(e.target.result);
-      const preview = document.getElementById('import-json-preview');
-      preview.value = JSON.stringify(pendingImportData, null, 2);
-      document.getElementById('import-preview').style.display = 'block';
-      document.getElementById('import-status').textContent =
-        `File read: ${pendingImportData.projects ? pendingImportData.projects.length + ' projects, ' : ''}${pendingImportData.yarns ? pendingImportData.yarns.length + ' yarns, ' : ''}${pendingImportData.futures ? pendingImportData.futures.length + ' future ideas.' : ''}`;
-    } catch(err) {
-      document.getElementById('import-status').textContent = 'Error reading file — is it a valid bearlyteals JSON backup?';
-    }
+    document.getElementById('paste-input').value = e.target.result;
+    fileDrop.querySelector('p').textContent = `✓ ${file.name} loaded`;
   };
   reader.readAsText(file);
 }
 
-function confirmImport(mode) {
-  if (!pendingImportData) return;
-  if (mode === 'replace') {
-    if (!confirm('This will REPLACE all your current data. Are you sure?')) return;
-    if (pendingImportData.projects) projects = pendingImportData.projects;
-    if (pendingImportData.futures)  futures  = pendingImportData.futures;
-    if (pendingImportData.yarns)    yarns    = pendingImportData.yarns;
-  } else {
-    // Merge — skip items with matching IDs
-    if (pendingImportData.projects) {
-      const existingIds = new Set(projects.map(x=>x.id));
-      pendingImportData.projects.forEach(p => { if (!existingIds.has(p.id)) projects.push(p); });
+// ── BACKUP TAB INIT ────────────────────────────────────────
+function renderBackupSelects() {
+  const bSel = document.getElementById('pdf-block-select');
+  bSel.innerHTML = '<option value="">— Select block —</option>' + state.blocks.map(b => `<option value="${b.id}">${b.name}</option>`).join('');
+  document.getElementById('pdf-week-select').innerHTML = '<option value="">All weeks</option>';
+}
+
+function onPdfBlockChange() {
+  const blockId = document.getElementById('pdf-block-select').value;
+  const wSel = document.getElementById('pdf-week-select');
+  wSel.innerHTML = '<option value="">All weeks</option>';
+  if (!blockId) return;
+  const block = state.blocks.find(b => b.id === blockId);
+  const loadedWeeks = Object.keys(block.weeks || {}).map(Number).sort((a,b) => a-b);
+  loadedWeeks.forEach(w => {
+    const opt = document.createElement('option');
+    opt.value = w; opt.textContent = `Week ${w}`;
+    wSel.appendChild(opt);
+  });
+}
+
+// ── JSON EXPORT / RESTORE ──────────────────────────────────
+function exportJSON() {
+  const data = JSON.stringify(state, null, 2);
+  const blob = new Blob([data], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const date = new Date().toISOString().slice(0,10);
+  a.href = url; a.download = `bombers-shed-backup-${date}.json`;
+  a.click(); URL.revokeObjectURL(url);
+  showBackupAlert('success', `✓ Backup downloaded — ${state.blocks.length} block(s) saved.`);
+}
+
+function restoreJSON(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const parsed = JSON.parse(e.target.result);
+      if (!parsed.blocks || !Array.isArray(parsed.blocks)) throw new Error('Invalid format');
+      if (!confirm(`This will REPLACE all current data with ${parsed.blocks.length} block(s) from the backup. Continue?`)) return;
+      state = parsed;
+      save();
+      renderBlocksList();
+      renderImportBlockSelect();
+      renderBackupSelects();
+      if (state.activeBlock && state.blocks.find(b => b.id === state.activeBlock)) {
+        document.getElementById('program-tab').style.display = '';
+      }
+      showBackupAlert('success', `✓ Restored ${parsed.blocks.length} block(s) successfully.`);
+    } catch(err) {
+      showBackupAlert('error', '✗ Could not restore — invalid or corrupted JSON file.');
     }
-    if (pendingImportData.futures) {
-      const existingIds = new Set(futures.map(x=>x.id));
-      pendingImportData.futures.forEach(f => { if (!existingIds.has(f.id)) futures.push(f); });
-    }
-    if (pendingImportData.yarns) {
-      const existingIds = new Set(yarns.map(x=>x.id));
-      pendingImportData.yarns.forEach(y => { if (!existingIds.has(y.id)) yarns.push(y); });
-    }
+    event.target.value = '';
+  };
+  reader.readAsText(file);
+}
+
+function showBackupAlert(type, msg) {
+  const el = document.getElementById('backup-alert');
+  el.innerHTML = `<div class="alert alert-${type}" style="margin-top:14px">${msg}</div>`;
+  setTimeout(() => { el.innerHTML = ''; }, 5000);
+}
+
+// ── PDF PRINT ──────────────────────────────────────────────
+function printPDF() {
+  const blockId = document.getElementById('pdf-block-select').value;
+  const weekVal = document.getElementById('pdf-week-select').value;
+  if (!blockId) { showBackupAlert('error', 'Please select a block to print.'); return; }
+
+  const block = state.blocks.find(b => b.id === blockId);
+  const weeksToPrint = weekVal
+    ? [parseInt(weekVal)]
+    : Object.keys(block.weeks || {}).map(Number).sort((a,b) => a-b);
+
+  if (!weeksToPrint || weeksToPrint.length === 0) {
+    showBackupAlert('error', 'No weeks loaded in this block yet.'); return;
   }
-  save();
-  cancelImport();
-  renderBackupSummary();
-  document.getElementById('import-status').textContent = mode === 'replace'
-    ? 'Data replaced successfully — ' + new Date().toLocaleString('en-AU')
-    : 'Data merged successfully — ' + new Date().toLocaleString('en-AU');
+
+  const html = buildPrintHTML(block, weeksToPrint);
+  const win = window.open('', '_blank', 'width=900,height=700');
+  win.document.write(html);
+  win.document.close();
+  setTimeout(() => { win.focus(); win.print(); }, 800);
 }
 
-function cancelImport() {
-  pendingImportData = null;
-  document.getElementById('import-preview').style.display = 'none';
-  document.getElementById('import-file').value = '';
+function buildPrintHTML(block, weeks) {
+  const date = new Date().toLocaleDateString('en-AU', { day:'numeric', month:'long', year:'numeric' });
+  let body = '';
+
+  weeks.forEach(wNum => {
+    const days = block.weeks[wNum];
+    if (!days) return;
+    body += `<div class="print-week-title">Week ${wNum}</div>`;
+    DAYS.forEach(day => {
+      const exs = days[day];
+      if (!exs || exs.length === 0) return;
+      body += `<div class="print-day-title">${day.charAt(0).toUpperCase() + day.slice(1)}</div>`;
+      if (exs.length === 1 && exs[0].name.toUpperCase().includes('REST')) {
+        body += `<div class="rest-day-print">Rest Day</div>`;
+        return;
+      }
+      exs.forEach((ex, i) => {
+        const key = `${wNum}-${day}-${i}`;
+        const isDone = (block.progress || {})[key] || false;
+        const comment = (block.comments || {})[key] || '';
+        const detailClean = (ex.detail || '').replace(/<a[^>]*>.*?<\/a>/g, '').trim();
+        body += `<div class="print-ex">
+          <div class="print-ex-name">
+            <span class="check-box ${isDone ? 'done' : ''}"></span>
+            ${ex.name}
+          </div>
+          ${detailClean ? `<div class="print-ex-detail">${detailClean}</div>` : ''}
+          ${comment ? `<div class="print-ex-comment">📝 ${comment}</div>` : '<span class="print-notes-line"></span>'}
+        </div>`;
+      });
+    });
+  });
+
+  return `<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<title>Bombers Shed — ${block.name}</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin:0; padding:0; }
+  body { font-family: 'Barlow', Arial, sans-serif; color: #111; background: #fff; }
+  .print-doc { max-width: 780px; margin: 0 auto; padding: 32px 28px; }
+  h1 { font-size: 2rem; font-weight: 900; letter-spacing: 0.04em; border-bottom: 4px solid #111; padding-bottom: 8px; margin-bottom: 4px; }
+  .print-meta { font-size: 0.8rem; color: #666; margin-bottom: 28px; }
+  .print-week-title { font-size: 1.3rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; background: #111; color: #fff; padding: 6px 14px; margin: 24px 0 10px; display: inline-block; }
+  .print-day-title { font-size: 1rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-left: 4px solid #111; padding-left: 10px; margin: 16px 0 6px; }
+  .print-ex { border: 1px solid #ddd; border-radius: 4px; padding: 10px 14px; margin-bottom: 8px; page-break-inside: avoid; }
+  .print-ex-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+  .check-box { width: 14px; height: 14px; border: 2px solid #555; border-radius: 2px; display: inline-block; flex-shrink: 0; }
+  .check-box.done { background: #2a9d5c; border-color: #2a9d5c; position:relative; }
+  .check-box.done::after { content:'✓'; color:#fff; font-size:10px; position:absolute; top:-1px; left:1px; }
+  .print-ex-detail { font-size: 0.82rem; color: #444; line-height: 1.6; white-space: pre-line; margin-top:4px; }
+  .print-ex-comment { font-size: 0.8rem; color: #777; margin-top: 5px; font-style: italic; border-top: 1px dashed #ddd; padding-top: 5px; }
+  .print-notes-line { border: none; border-bottom: 1px dashed #ccc; width: 100%; margin: 6px 0 2px; display: block; height: 16px; }
+  .rest-day-print { color: #999; font-style: italic; font-size: 0.9rem; padding: 6px 0; }
+  .print-footer { margin-top: 32px; border-top: 1px solid #ddd; padding-top: 12px; font-size: 0.75rem; color: #aaa; text-align: center; }
+  @media print { * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; } }
+</style>
+</head><body>
+<div class="print-doc">
+  <h1>Bombers Shed</h1>
+  <div class="print-meta">${block.name} · Printed ${date} · ${weeks.length === 1 ? 'Week ' + weeks[0] : weeks.length + ' weeks'}</div>
+  ${body}
+  <div class="print-footer">Bombers Shed Training Log · bombers-shed.html</div>
+</div>
+</body></html>`;
 }
 
-function clearAll() {
-  if (!confirm('This will permanently delete ALL your bearlyteals data. Export a backup first. Continue?')) return;
-  if (!confirm('Are you absolutely certain?')) return;
-  projects = []; futures = []; yarns = [];
-  save(); renderBackupSummary();
-  document.getElementById('export-status').textContent = 'All data cleared.';
+// ── INIT ───────────────────────────────────────────────────
+renderBlocksList();
+renderImportBlockSelect();
+if (state.activeBlock && state.blocks.find(b => b.id === state.activeBlock)) {
+  document.getElementById('program-tab').style.display = '';
 }
-
-function showRawData() {
-  const el = document.getElementById('raw-json-view');
-  el.value = JSON.stringify({ projects, futures, yarns }, null, 2);
-  el.style.display = 'block';
-}
-
-function hideRawData() {
-  document.getElementById('raw-json-view').style.display = 'none';
-}
-
-function renderBackupSummary() {
-  const el = document.getElementById('backup-summary');
-  const d = new Date();
-  el.innerHTML = `
-    <div class="stat-box"><div class="stat-num">${projects.length}</div><div class="stat-label">Projects</div></div>
-    <div class="stat-box"><div class="stat-num">${futures.length}</div><div class="stat-label">Future Ideas</div></div>
-    <div class="stat-box"><div class="stat-num">${yarns.length}</div><div class="stat-label">Yarn Entries</div></div>
-  `;
-}
-
-// ─── Init ─────────────────────────────────────────────────
-renderProjects();
 </script>
 </body>
 </html>
